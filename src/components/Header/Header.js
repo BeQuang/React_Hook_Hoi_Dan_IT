@@ -2,7 +2,9 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+import "./Header.scss";
 
 const Header = () => {
   return (
@@ -12,15 +14,15 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/" className="nav-link">
+            <NavLink to="/" className="nav-link">
               Home
-            </Link>
-            <Link to="/users" className="nav-link">
+            </NavLink>
+            <NavLink to="/users" className="nav-link">
               Users
-            </Link>
-            <Link to="/admins" className="nav-link">
+            </NavLink>
+            <NavLink to="/admins" className="nav-link">
               Admin
-            </Link>
+            </NavLink>
             {/* <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/users">Users</Nav.Link>
             <Nav.Link href="/admins">Admin</Nav.Link> */}
