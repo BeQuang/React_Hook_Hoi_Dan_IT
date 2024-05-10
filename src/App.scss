@@ -1,3 +1,8 @@
+:root {
+  --primary-color: rgb(11, 196, 226);
+  --background-color: rgba(128, 128, 128, 0.2);
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -6,4 +11,26 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 1600px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1550px !important;
+  }
+}
+
+@media (min-width: 1750px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1700px !important;
+  }
 }
