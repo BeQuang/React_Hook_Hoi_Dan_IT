@@ -1,5 +1,5 @@
 import "./ManageUser.scss";
-import ModelCreateUser from "./ModelCreateUser/ModelCreateUser";
+import ModalCreateUser from "./ModalCreateUser/ModalCreateUser";
 
 function ManageUser() {
   return (
@@ -9,10 +9,8 @@ function ManageUser() {
         <div>
           <button>Add new users</button>
         </div>
-        <div>
-          table users
-          <ModelCreateUser />
-        </div>
+        <div>table users</div>
+        <ModalCreateUser />
       </div>
     </div>
   );

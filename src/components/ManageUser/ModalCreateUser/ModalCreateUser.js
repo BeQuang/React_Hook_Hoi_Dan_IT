@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { CgFileAdd } from "react-icons/cg";
+import "./ModalCreateUser.scss";
 
-function ModelCreateUser() {
+function ModalCreateUser() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -14,7 +16,13 @@ function ModelCreateUser() {
         Launch demo modal
       </Button>
 
-      <Modal backdrop="static" show={show} onHide={handleClose} size="xl">
+      <Modal
+        backdrop="static"
+        show={show}
+        onHide={handleClose}
+        size="xl"
+        className="modal-add-user"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Add new user</Modal.Title>
         </Modal.Header>
@@ -55,9 +63,16 @@ function ModelCreateUser() {
             </div>
             <div className="form-row">
               <div className="form-group col-md-12">
-                <label>Image</label>
-                <input type="file" />
+                <label className="btn-upload" htmlFor="labelUpload">
+                  <CgFileAdd />
+                  Upload image
+                </label>
+                <input id="labelUpload" type="file" hidden />
               </div>
+            </div>
+            <div className="col-md-12 img-preview">
+              {/* <span>Preview</span> */}
+              <img src="https://short.com.vn/3l8W" />
             </div>
           </form>
         </Modal.Body>
@@ -74,4 +89,4 @@ function ModelCreateUser() {
   );
 }
 
-export default ModelCreateUser;
+export default ModalCreateUser;
