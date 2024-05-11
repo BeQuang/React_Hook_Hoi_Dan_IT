@@ -10,6 +10,20 @@ function ModalCreateUser() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("USER");
+  const [avatar, setAvatar] = useState("");
+  const [previewImage, setPreviewImage] = useState("");
+
+  function handleUpLoadImage(e) {
+    if (e.target && e.target.files && e.target.files[0]) {
+      setPreviewImage(URL.createObjectURL(e.target.files[0]));
+      setAvatar(e.target.files[0]);
+    }
+  }
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -35,6 +49,8 @@ function ModalCreateUser() {
                   type="email"
                   className="form-control"
                   placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -43,18 +59,29 @@ function ModalCreateUser() {
                   type="password"
                   className="form-control"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label>Username</label>
-                <input type="text" className="form-control" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
               </div>
               <div className="form-group col-md-6">
                 <label>Role</label>
-                <select className="form-control">
-                  <option selected value="USER">
+                <select
+                  className="form-control"
+                  onChange={(e) => setRole(e.target.value)}
+                >
+                  <option selected value={role}>
                     USER
                   </option>
                   <option value="ADMIN">ADMIN</option>
@@ -67,12 +94,21 @@ function ModalCreateUser() {
                   <CgFileAdd />
                   Upload image
                 </label>
-                <input id="labelUpload" type="file" hidden />
+                <input
+                  id="labelUpload"
+                  type="file"
+                  hidden
+                  onChange={(e) => handleUpLoadImage(e)}
+                />
               </div>
             </div>
             <div className="col-md-12 img-preview">
-              {/* <span>Preview</span> */}
-              <img src="https://short.com.vn/3l8W" />
+              {previewImage ? (
+                // eslint-disable-next-line jsx-a11y/alt-text
+                <img src={previewImage} />
+              ) : (
+                <span>Preview image</span>
+              )}
             </div>
           </form>
         </Modal.Body>

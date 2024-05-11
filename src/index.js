@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import User from "./pages/User/User";
 import Admin from "./pages/Admin/Admin";
 import Home from "./pages/Home/Home";
-import DashBoard from "./components/Dashboard/Dashboard";
+import DashBoard from "./components/DashBoard/DashBoard";
 import ManageUser from "./components/ManageUser/ManageUser";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
