@@ -1,16 +1,29 @@
+import { useState } from "react";
 import "./ManageUser.scss";
 import ModalCreateUser from "./ModalCreateUser/ModalCreateUser";
+import { GoPlus } from "react-icons/go";
 
 function ManageUser() {
+  const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+
   return (
-    <div className="mmanage-user">
+    <div className="manage-user">
       <div className="title">Manage User</div>
       <div className="content">
-        <div>
-          <button>Add new users</button>
+        <div className="btn-add-user">
+          <button
+            className="btn btn-info"
+            onClick={() => setShowModalCreateUser(true)}
+          >
+            <GoPlus />
+            Add new users
+          </button>
         </div>
-        <div>table users</div>
-        <ModalCreateUser />
+        <div className="table-users">table users</div>
+        <ModalCreateUser
+          show={showModalCreateUser}
+          setShow={setShowModalCreateUser}
+        />
       </div>
     </div>
   );
