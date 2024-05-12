@@ -11,7 +11,7 @@ import {
 } from "../../Validate/Validate";
 import { postCreateUser } from "../../../services/userService";
 
-function ModalCreateUser({ show, setShow }) {
+function ModalCreateUser({ show, setShow, fetchListUsers }) {
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -61,6 +61,7 @@ function ModalCreateUser({ show, setShow }) {
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
+      await fetchListUsers();
     } else {
       toast.error(data.EM);
     }
