@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./ManageUser.scss";
 import ModalCreateUser from "./ModalCreateUser/ModalCreateUser";
 import { GoPlus } from "react-icons/go";
+import TableUser from "../TableUser/TableUser";
 
 function ManageUser() {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
@@ -19,7 +20,9 @@ function ManageUser() {
             Add new users
           </button>
         </div>
-        <div className="table-users">table users</div>
+        <div className="table-users">
+          <TableUser />
+        </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
