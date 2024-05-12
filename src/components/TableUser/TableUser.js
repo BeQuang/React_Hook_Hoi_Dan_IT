@@ -1,20 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAllUsers } from "../../services/userService";
 
 function TableUser() {
-  const [listUsers, setListUsers] = useState([
-    {
-      id: 7,
-      username: "Bé Quang",
-      email: "buithanhquangqn22@gmail.com",
-      role: "USER",
-    },
-    {
-      id: 5,
-      username: "21522507",
-      email: "21522507@gm.uit.edu.vn",
-      role: "USER",
-    },
-  ]);
+  const [listUsers, setListUsers] = useState([]);
+
+  useEffect(() => {
+    fetchListUsers();
+  }, []);
+
+  const fetchListUsers = async () => {
+    let res = await getAllUsers();
+    if (res.EC === 0) {
+      setListUsers(res.DT);
+    }
+  };
 
   return (
     <>
@@ -25,16 +24,22 @@ function TableUser() {
             <th scope="col">Email</th>
             <th scope="col">Username</th>
             <th scope="col">Role</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          {listUsers.map((user) => {
+          {listUsers.map((user, index) => {
             return (
-              <tr>
+              <tr key={`table-users-${index}`}>
                 <th scope="row">{user.id}</th>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
+                <td>
+                  <button className="btn btn-secondary ">View</button>
+                  <button className="btn btn-warning mx-3">Update</button>
+                  <button className="btn btn-danger">Delete</button>
+                </td>
               </tr>
             );
           })}
