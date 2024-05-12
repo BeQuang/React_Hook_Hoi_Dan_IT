@@ -2,14 +2,14 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { CgFileAdd } from "react-icons/cg";
-import "./ModalCreateUser.scss";
+import "./ModalUser.scss";
 import { toast } from "react-toastify";
 import {
   validateEmail,
   validateEmpty,
   validatePassword,
-} from "../../Validate/Validate";
-import { postCreateUser } from "../../../services/userService";
+} from "../Validate/Validate";
+import { postCreateUser } from "../../services/userService";
 
 function ModalCreateUser({ show, setShow, fetchListUsers }) {
   const handleClose = () => {
