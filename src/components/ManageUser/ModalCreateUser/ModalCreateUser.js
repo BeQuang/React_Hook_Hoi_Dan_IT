@@ -3,13 +3,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { CgFileAdd } from "react-icons/cg";
 import "./ModalCreateUser.scss";
-import axios from "axios";
 import { toast } from "react-toastify";
 import {
   validateEmail,
   validateEmpty,
   validatePassword,
 } from "../../Validate/Validate";
+import { postCreateUser } from "../../../services/userService";
 
 function ModalCreateUser({ show, setShow }) {
   const handleClose = () => {
@@ -56,25 +56,13 @@ function ModalCreateUser({ show, setShow }) {
       return;
     }
 
-    // call APIs
-    const data = new FormData();
-    data.append("email", email);
-    data.append("password", password);
-    data.append("username", username);
-    data.append("role", role);
-    data.append("userImage", avatar);
+    const data = await postCreateUser(email, password, username, role, avatar);
 
-    const res = await axios.post(
-      "http://localhost:8081/api/v1/participant",
-      data
-    );
-    console.log(res);
-
-    if (res.data && res.data.EC === 0) {
-      toast.success(res.data.EM);
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
       handleClose();
     } else {
-      toast.error(res.data.EM);
+      toast.error(data.EM);
     }
   };
 
