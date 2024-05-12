@@ -5,6 +5,11 @@ import { CgFileAdd } from "react-icons/cg";
 import "./ModalCreateUser.scss";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {
+  validateEmail,
+  validateEmpty,
+  validatePassword,
+} from "../../Validate/Validate";
 
 function ModalCreateUser({ show, setShow }) {
   const handleClose = () => {
@@ -32,23 +37,22 @@ function ModalCreateUser({ show, setShow }) {
     }
   };
 
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
   const handSubmitCreateUser = async () => {
     // validate
     const isValidEmail = validateEmail(email);
+    console.log(isValidEmail);
     if (!isValidEmail) {
       toast.error("Invalid email");
       return;
     }
-    if (!password) {
-      toast.error("Invalid password");
+    if (!validatePassword(password)) {
+      toast.error(
+        "Password of at least 6 characters including numbers and capital characters"
+      );
+      return;
+    }
+    if (!validateEmpty(username)) {
+      toast.error("Please enter the username field");
       return;
     }
 
