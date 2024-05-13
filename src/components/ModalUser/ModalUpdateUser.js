@@ -4,15 +4,17 @@ import Modal from "react-bootstrap/Modal";
 import { CgFileAdd } from "react-icons/cg";
 import "./ModalUser.scss";
 import { toast } from "react-toastify";
-import {
-  validateEmail,
-  validateEmpty,
-  validatePassword,
-} from "../Validate/Validate";
-import { postCreateUser } from "../../services/userService";
+import { validateEmpty } from "../Validate/Validate";
+import { putUpdateUser } from "../../services/userService";
 import _ from "lodash";
 
-function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
+function ModalUpdateUser({
+  show,
+  setShow,
+  fetchListUsers,
+  dataUpdate,
+  resetDataUpdate,
+}) {
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -21,6 +23,7 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
     setRole("USER");
     setAvatar("");
     setPreviewImage("");
+    resetDataUpdate();
   };
 
   const [email, setEmail] = useState("");
@@ -49,25 +52,14 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
     }
   };
 
-  const handSubmitCreateUser = async () => {
+  const handSubmitUpdateUser = async () => {
     // validate
-    const isValidEmail = validateEmail(email);
-    if (!isValidEmail) {
-      toast.error("Invalid email");
-      return;
-    }
-    if (!validatePassword(password)) {
-      toast.error(
-        "Password of at least 6 characters including numbers and capital characters"
-      );
-      return;
-    }
     if (!validateEmpty(username)) {
       toast.error("Please enter the username field");
       return;
     }
 
-    const data = await postCreateUser(email, password, username, role, avatar);
+    const data = await putUpdateUser(dataUpdate.id, username, role, avatar);
 
     if (data && data.EC === 0) {
       toast.success(data.EM);
@@ -167,7 +159,7 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handSubmitCreateUser}>
+          <Button variant="primary" onClick={handSubmitUpdateUser}>
             Save
           </Button>
         </Modal.Footer>
