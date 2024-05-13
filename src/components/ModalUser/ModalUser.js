@@ -9,10 +9,17 @@ import {
   validateEmpty,
   validatePassword,
 } from "../Validate/Validate";
-import { postCreateUser } from "../../services/userService";
+import { postCreateUser, putUpdateUser } from "../../services/userService";
 import _ from "lodash";
 
-function ModalUser({ show, setShow, fetchListUsers, dataUpdate, typeModal }) {
+function ModalUser({
+  show,
+  setShow,
+  fetchListUsers,
+  dataUpdate,
+  typeModal,
+  resetDataUpdate,
+}) {
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -21,6 +28,7 @@ function ModalUser({ show, setShow, fetchListUsers, dataUpdate, typeModal }) {
     setRole("USER");
     setAvatar("");
     setPreviewImage("");
+    resetDataUpdate();
   };
 
   const [email, setEmail] = useState("");
@@ -86,6 +94,25 @@ function ModalUser({ show, setShow, fetchListUsers, dataUpdate, typeModal }) {
     }
 
     const data = await postCreateUser(email, password, username, role, avatar);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      handleClose();
+      await fetchListUsers();
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  // Handle Update Data
+  const handSubmitUpdateUser = async () => {
+    // validate
+    if (!validateEmpty(username)) {
+      toast.error("Please enter the username field");
+      return;
+    }
+
+    const data = await putUpdateUser(dataUpdate.id, username, role, avatar);
 
     if (data && data.EC === 0) {
       toast.success(data.EM);
@@ -185,9 +212,19 @@ function ModalUser({ show, setShow, fetchListUsers, dataUpdate, typeModal }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handSubmitCreateUser}>
-            Save
-          </Button>
+          {typeModal === "Create" ? (
+            <Button variant="primary" onClick={handSubmitCreateUser}>
+              Save
+            </Button>
+          ) : typeModal === "Update" ? (
+            <Button variant="primary" onClick={handSubmitUpdateUser}>
+              Save
+            </Button>
+          ) : (
+            <Button variant="primary" onClick={handSubmitUpdateUser}>
+              Save
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </>

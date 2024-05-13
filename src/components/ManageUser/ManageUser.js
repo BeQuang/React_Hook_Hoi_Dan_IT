@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import "./ManageUser.scss";
 // import ModalCreateUser from "../ModalUser/ModalCreateUser";
+// import ModalUpdateUser from "../ModalUser/ModalUpdateUser";
 import { GoPlus } from "react-icons/go";
 import TableUser from "../TableUser/TableUser";
 import { getAllUsers } from "../../services/userService";
-import ModalUpdateUser from "../ModalUser/ModalUpdateUser";
 import ModalUser from "../ModalUser/ModalUser";
 
 function ManageUser() {
   // const [showModalCreateUser, setShowModalCreateUser] = useState(false);
-  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  // const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
   const [listUsers, setListUsers] = useState([]);
   const [typeModal, setTypeModal] = useState("");
@@ -33,7 +33,7 @@ function ManageUser() {
   };
 
   const handleClickBtnUpdate = (user) => {
-    setShowModalUpdateUser(true);
+    // setShowModalUpdateUser(true);
     setTypeModal("Update");
     setDataUpdate(user);
     setShow(true);
@@ -67,20 +67,21 @@ function ManageUser() {
           setShow={setShowModalCreateUser}
           fetchListUsers={fetchListUsers}
         /> */}
-        <ModalUpdateUser
+        {/* <ModalUpdateUser
           show={showModalUpdateUser}
           setShow={setShowModalUpdateUser}
           fetchListUsers={fetchListUsers}
           dataUpdate={dataUpdate}
           resetDataUpdate={resetDataUpdate}
-        />
-        {/* <ModalUser
+        /> */}
+        <ModalUser
           show={show}
           setShow={setShow}
           fetchListUsers={fetchListUsers}
           dataUpdate={dataUpdate}
           typeModal={typeModal}
-        /> */}
+          resetDataUpdate={resetDataUpdate}
+        />
       </div>
     </div>
   );
