@@ -1,4 +1,4 @@
-function TableUser({ listUsers, handleClickBtnUpdate }) {
+function TableUser({ listUsers, handleClickBtnView, handleClickBtnUpdate }) {
   return (
     <>
       <table className="table table-info table-bordered table-hover">
@@ -20,7 +20,12 @@ function TableUser({ listUsers, handleClickBtnUpdate }) {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
-                  <button className="btn btn-secondary ">View</button>
+                  <button
+                    className="btn btn-secondary "
+                    onClick={() => handleClickBtnView(user)}
+                  >
+                    View
+                  </button>
                   <button
                     className="btn btn-warning mx-3"
                     onClick={() => handleClickBtnUpdate(user)}

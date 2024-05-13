@@ -39,6 +39,12 @@ function ManageUser() {
     setShow(true);
   };
 
+  const handleClickBtnView = (user) => {
+    setTypeModal("View");
+    setDataUpdate(user);
+    setShow(true);
+  };
+
   const resetDataUpdate = () => {
     setDataUpdate({});
   };
@@ -60,6 +66,7 @@ function ManageUser() {
           <TableUser
             listUsers={listUsers}
             handleClickBtnUpdate={handleClickBtnUpdate}
+            handleClickBtnView={handleClickBtnView}
           />
         </div>
         {/* <ModalCreateUser

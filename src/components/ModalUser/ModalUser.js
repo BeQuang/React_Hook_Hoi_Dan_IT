@@ -38,18 +38,25 @@ function ModalUser({
   // eslint-disable-next-line
   const [avatar, setAvatar] = useState("");
   const [previewImage, setPreviewImage] = useState("");
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(false);
+  const [disabledView, setDisabledView] = useState(false);
   const [title, setTitle] = useState("");
 
   useEffect(() => {
     switch (typeModal) {
       case "Create":
         setDisabled(false);
+        setDisabledView(false);
         setTitle("Add new user");
         break;
       case "Update":
         setDisabled(true);
+        setDisabledView(false);
         setTitle("Update a user");
+        break;
+      case "View":
+        setDisabledView(true);
+        setTitle("View a user");
         break;
       default:
     }
@@ -169,6 +176,7 @@ function ModalUser({
                   className="form-control"
                   placeholder="Username"
                   value={username}
+                  disabled={disabledView}
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
@@ -178,6 +186,7 @@ function ModalUser({
                   className="form-control"
                   onChange={(e) => setRole(e.target.value)}
                   value={role}
+                  disabled={disabledView}
                 >
                   <option>USER</option>
                   <option value="ADMIN">ADMIN</option>
@@ -194,6 +203,7 @@ function ModalUser({
                   id="labelUpload"
                   type="file"
                   hidden
+                  disabled={disabledView}
                   onChange={(e) => handleUpLoadImage(e)}
                 />
               </div>
@@ -220,11 +230,7 @@ function ModalUser({
             <Button variant="primary" onClick={handSubmitUpdateUser}>
               Save
             </Button>
-          ) : (
-            <Button variant="primary" onClick={handSubmitUpdateUser}>
-              Save
-            </Button>
-          )}
+          ) : null}
         </Modal.Footer>
       </Modal>
     </>
