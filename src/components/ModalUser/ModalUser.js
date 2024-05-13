@@ -12,7 +12,7 @@ import {
 import { postCreateUser } from "../../services/userService";
 import _ from "lodash";
 
-function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
+function ModalUser({ show, setShow, fetchListUsers, dataUpdate, typeModal }) {
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -30,7 +30,24 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
   // eslint-disable-next-line
   const [avatar, setAvatar] = useState("");
   const [previewImage, setPreviewImage] = useState("");
+  const [disabled, setDisabled] = useState(true);
+  const [title, setTitle] = useState("");
 
+  useEffect(() => {
+    switch (typeModal) {
+      case "Create":
+        setDisabled(false);
+        setTitle("Add new user");
+        break;
+      case "Update":
+        setDisabled(true);
+        setTitle("Update a user");
+        break;
+      default:
+    }
+  }, [typeModal]);
+
+  // Handle Update User
   useEffect(() => {
     if (!_.isEmpty(dataUpdate)) {
       setEmail(dataUpdate.email);
@@ -49,6 +66,7 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
     }
   };
 
+  // Handle Create User
   const handSubmitCreateUser = async () => {
     // validate
     const isValidEmail = validateEmail(email);
@@ -88,7 +106,7 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
         className="modal-add-user"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update a user</Modal.Title>
+          <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
@@ -100,7 +118,7 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
                   className="form-control"
                   placeholder="Email"
                   value={email}
-                  disabled
+                  disabled={disabled}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -111,7 +129,7 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
                   className="form-control"
                   placeholder="Password"
                   value={password}
-                  disabled
+                  disabled={disabled}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
@@ -176,4 +194,4 @@ function ModalUpdateUser({ show, setShow, fetchListUsers, dataUpdate }) {
   );
 }
 
-export default ModalUpdateUser;
+export default ModalUser;

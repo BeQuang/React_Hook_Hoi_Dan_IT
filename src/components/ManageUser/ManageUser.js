@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
 import "./ManageUser.scss";
-import ModalCreateUser from "../ModalUser/ModalCreateUser";
+// import ModalCreateUser from "../ModalUser/ModalCreateUser";
 import { GoPlus } from "react-icons/go";
 import TableUser from "../TableUser/TableUser";
 import { getAllUsers } from "../../services/userService";
-import ModalUpdateUser from "../ModalUser/ModalUpdateUser";
+// import ModalUpdateUser from "../ModalUser/ModalUpdateUser";
+import ModalUser from "../ModalUser/ModalUser";
 
 function ManageUser() {
-  const [showModalCreateUser, setShowModalCreateUser] = useState(false);
-  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  // const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+  // const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
   const [listUsers, setListUsers] = useState([]);
+  const [typeModal, setTypeModal] = useState("");
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     fetchListUsers();
@@ -23,9 +26,17 @@ function ManageUser() {
     }
   };
 
+  const handleClickBtnCreate = () => {
+    // setShowModalCreateUser(true);
+    setTypeModal("Create");
+    setShow(true);
+  };
+
   const handleClickBtnUpdate = (user) => {
-    setShowModalUpdateUser(true);
+    // setShowModalUpdateUser(true);
+    setTypeModal("Update");
     setDataUpdate(user);
+    setShow(true);
   };
 
   return (
@@ -35,7 +46,7 @@ function ManageUser() {
         <div className="btn-add-user">
           <button
             className="btn btn-info"
-            onClick={() => setShowModalCreateUser(true)}
+            onClick={() => handleClickBtnCreate()}
           >
             <GoPlus />
             Add new users
@@ -47,7 +58,7 @@ function ManageUser() {
             handleClickBtnUpdate={handleClickBtnUpdate}
           />
         </div>
-        <ModalCreateUser
+        {/* <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
           fetchListUsers={fetchListUsers}
@@ -56,6 +67,13 @@ function ManageUser() {
           show={showModalUpdateUser}
           setShow={setShowModalUpdateUser}
           dataUpdate={dataUpdate}
+        /> */}
+        <ModalUser
+          show={show}
+          setShow={setShow}
+          fetchListUsers={fetchListUsers}
+          dataUpdate={dataUpdate}
+          typeModal={typeModal}
         />
       </div>
     </div>
