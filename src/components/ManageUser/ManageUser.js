@@ -101,6 +101,7 @@ function ManageUser() {
         <ModalDeleteUser
           show={showModalDeleteUser}
           setShow={setShowModalDeleteUser}
+          fetchListUsers={fetchListUsers}
           dataDelete={dataDelete}
         />
       </div>
