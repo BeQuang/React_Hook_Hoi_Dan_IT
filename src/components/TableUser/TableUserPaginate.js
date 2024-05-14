@@ -7,11 +7,13 @@ function TableUserPaginate({
   handleClickBtnDelete,
   fetchListUsersWithPaginate,
   pageCount,
+  currentPage,
+  setCurrentPage,
 }) {
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     fetchListUsersWithPaginate(+event.selected + 1);
-    console.log(`User requested page number ${event.selected}`);
+    setCurrentPage(+event.selected + 1);
   };
   return (
     <>
@@ -78,6 +80,7 @@ function TableUserPaginate({
           containerClassName="pagination"
           activeClassName="active"
           renderOnZeroPageCount={null}
+          forcePage={currentPage - 1}
         />
       </div>
     </>

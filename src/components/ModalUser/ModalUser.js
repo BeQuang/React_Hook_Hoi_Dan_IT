@@ -16,9 +16,12 @@ function ModalUser({
   show,
   setShow,
   fetchListUsers,
+  fetchListUsersWithPaginate,
   dataUpdate,
   typeModal,
   resetDataUpdate,
+  currentPage,
+  setCurrentPage,
 }) {
   const handleClose = () => {
     setShow(false);
@@ -105,7 +108,9 @@ function ModalUser({
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
-      await fetchListUsers();
+      // await fetchListUsers();
+      setCurrentPage(1);
+      await fetchListUsersWithPaginate(1);
     } else {
       toast.error(data.EM);
     }
@@ -124,7 +129,8 @@ function ModalUser({
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
-      await fetchListUsers();
+      // await fetchListUsers();
+      await fetchListUsersWithPaginate(currentPage);
     } else {
       toast.error(data.EM);
     }
