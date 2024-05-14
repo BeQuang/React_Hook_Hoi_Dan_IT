@@ -6,11 +6,14 @@ import { GoPlus } from "react-icons/go";
 import TableUser from "../TableUser/TableUser";
 import { getAllUsers } from "../../services/userService";
 import ModalUser from "../ModalUser/ModalUser";
+import ModalDeleteUser from "../ModalUser/ModalDeleteUser";
 
 function ManageUser() {
   // const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   // const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
+  const [dataDelete, setDataDelete] = useState({});
   const [listUsers, setListUsers] = useState([]);
   const [typeModal, setTypeModal] = useState("");
   const [show, setShow] = useState(false);
@@ -45,6 +48,11 @@ function ManageUser() {
     setShow(true);
   };
 
+  const handleClickBtnDelete = (user) => {
+    setShowModalDeleteUser(true);
+    setDataDelete(user);
+  };
+
   const resetDataUpdate = () => {
     setDataUpdate({});
   };
@@ -67,6 +75,7 @@ function ManageUser() {
             listUsers={listUsers}
             handleClickBtnUpdate={handleClickBtnUpdate}
             handleClickBtnView={handleClickBtnView}
+            handleClickBtnDelete={handleClickBtnDelete}
           />
         </div>
         {/* <ModalCreateUser
@@ -88,6 +97,11 @@ function ManageUser() {
           dataUpdate={dataUpdate}
           typeModal={typeModal}
           resetDataUpdate={resetDataUpdate}
+        />
+        <ModalDeleteUser
+          show={showModalDeleteUser}
+          setShow={setShowModalDeleteUser}
+          dataDelete={dataDelete}
         />
       </div>
     </div>

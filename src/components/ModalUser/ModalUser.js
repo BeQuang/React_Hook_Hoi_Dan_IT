@@ -137,7 +137,7 @@ function ModalUser({
         show={show}
         onHide={handleClose}
         size="xl"
-        className="modal-add-user"
+        className="modal-user"
       >
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>

@@ -74,7 +74,7 @@ function ModalCreateUser({ show, setShow, fetchListUsers }) {
         show={show}
         onHide={handleClose}
         size="xl"
-        className="modal-add-user"
+        className="modal-user"
       >
         <Modal.Header closeButton>
           <Modal.Title>Add new user</Modal.Title>

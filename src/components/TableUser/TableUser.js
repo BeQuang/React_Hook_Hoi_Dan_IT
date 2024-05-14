@@ -1,4 +1,9 @@
-function TableUser({ listUsers, handleClickBtnView, handleClickBtnUpdate }) {
+function TableUser({
+  listUsers,
+  handleClickBtnView,
+  handleClickBtnUpdate,
+  handleClickBtnDelete,
+}) {
   return (
     <>
       <table className="table table-info table-bordered table-hover">
@@ -32,7 +37,12 @@ function TableUser({ listUsers, handleClickBtnView, handleClickBtnUpdate }) {
                   >
                     Update
                   </button>
-                  <button className="btn btn-danger">Delete</button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleClickBtnDelete(user)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );
