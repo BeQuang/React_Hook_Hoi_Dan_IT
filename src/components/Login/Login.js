@@ -3,13 +3,25 @@ import "./Login.scss";
 import { FcGoogle } from "react-icons/fc";
 import { FaMicrosoft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { postLogin } from "../../services/userService.js";
+import { toast } from "react-toastify";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    // validate
+
+    let data = await postLogin(email, password);
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      navigate("/");
+    } else {
+      toast.error(data.EM);
+    }
+  };
 
   return (
     <div className="login">
