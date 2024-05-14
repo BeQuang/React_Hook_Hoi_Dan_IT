@@ -2,17 +2,23 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 // import NavDropdown from "react-bootstrap/NavDropdown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import "./Header.scss";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        {/* <Navbar.Brand href="#home">League of Legend</Navbar.Brand> */}
+        {/* <Navbar.Brand href="#home">Quiz LOL</Navbar.Brand> */}
         <NavLink to="/" className="navbar-brand">
-          League of Legend
+          Quiz LOL
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -31,7 +37,9 @@ const Header = () => {
             <Nav.Link href="/admins">Admin</Nav.Link> */}
           </Nav>
           <Nav>
-            <button className="btn-login">Log in</button>
+            <button className="btn-login" onClick={() => handleLogin()}>
+              Log in
+            </button>
             <button className="btn-signup">Sign up</button>
             {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item>Log in</NavDropdown.Item>

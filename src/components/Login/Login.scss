@@ -1,0 +1,36 @@
+.login {
+  .header {
+    height: 45px;
+    text-align: end;
+    border: 1px solid red;
+  }
+
+  .title {
+    font-size: 25px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .welcome {
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .form {
+    input {
+      margin-bottom: 16px;
+      margin-top: 4px;
+    }
+
+    .btn-login {
+      width: 100%;
+      min-height: 36px;
+      border: none;
+      border-radius: 4px;
+      margin: 24px 0;
+      color: white;
+      background-color: black;
+    }
+  }
+}
