@@ -40,7 +40,7 @@
     max-width: 120px;
     padding: 8px 10px;
     border-radius: 6px;
-    background-color: rgba(11, 196, 226, 0.6);
+    background-color: var(--background-hover-primary);
     cursor: pointer;
 
     &:hover {
@@ -50,8 +50,8 @@
 
   .modal-footer {
     .btn-primary {
-      background-color: rgba(11, 196, 226, 0.6);
-      border: 1px solid rgba(11, 196, 226, 0.6);
+      background-color: var(--background-hover-primary);
+      border: 1px solid var(--background-hover-primary);
       color: black;
 
       &:hover {
