@@ -23,11 +23,17 @@ function Login() {
     }
   };
 
+  const handleSingIn = () => {
+    navigate("/register");
+  };
+
   return (
     <div className="login">
       <div className="header">
         <span>Don't have an account yet?</span>
-        <button className="btn-sign-in">Sign in</button>
+        <button className="btn-sign-in" onClick={() => handleSingIn()}>
+          Sign in
+        </button>
       </div>
       <div className="title col-4 mx-auto">Quiz LOL</div>
       <div className="welcome col-4 mx-auto">Hello, who's this?</div>
@@ -65,12 +71,7 @@ function Login() {
             <FaMicrosoft /> <span>Login with Microsoft</span>
           </button>
         </div>
-        <div
-          className="back-home"
-          onClick={() => {
-            navigate("/");
-          }}
-        >
+        <div className="back-home" onClick={() => handleSingIn()}>
           &#60;&#60; Go to back Home
         </div>
       </div>
