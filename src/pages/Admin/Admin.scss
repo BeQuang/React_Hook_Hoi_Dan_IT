@@ -1,0 +1,18 @@
+.admin {
+  display: flex;
+
+  .admin-sidebar {
+    .pro-sidebar {
+      height: 100vh;
+    }
+  }
+
+  .admin-content {
+    width: 100%;
+
+    .admin-header {
+      height: 40px;
+      border: 1px solid red;
+    }
+  }
+}
