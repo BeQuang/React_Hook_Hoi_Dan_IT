@@ -1,5 +1,5 @@
-import videoHome from "../../assets/video/video-homepage.webm";
 import "./Home.scss";
+import videoHome from "../../assets/video/video-homepage.webm";
 
 function Home() {
   return (

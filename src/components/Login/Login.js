@@ -1,10 +1,12 @@
 import { useState } from "react";
-import "./Login.scss";
 import { FcGoogle } from "react-icons/fc";
 import { FaMicrosoft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { postLogin } from "../../services/userService.js";
 import { toast } from "react-toastify";
+
+import "./Login.scss";
+import { postLogin } from "../../services/userService.js";
+import { validateEmail, validatePassword } from "../Validate/Validate.js";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,6 +15,13 @@ function Login() {
 
   const handleLogin = async () => {
     // validate
+    if (!validateEmail(email)) {
+      toast.error("Invalid email");
+      return;
+    } else if (!validatePassword(password)) {
+      toast.error("Incorrect password");
+      return;
+    }
 
     let data = await postLogin(email, password);
     if (data && data.EC === 0) {
@@ -23,15 +32,22 @@ function Login() {
     }
   };
 
-  const handleSingIn = () => {
+  const handleSwitchPageSingIn = () => {
     navigate("/register");
+  };
+
+  const handleSwitchPageHome = () => {
+    navigate("/");
   };
 
   return (
     <div className="login">
       <div className="header">
         <span>Don't have an account yet?</span>
-        <button className="btn-sign-in" onClick={() => handleSingIn()}>
+        <button
+          className="btn-sign-in"
+          onClick={() => handleSwitchPageSingIn()}
+        >
           Sign in
         </button>
       </div>
@@ -71,7 +87,7 @@ function Login() {
             <FaMicrosoft /> <span>Login with Microsoft</span>
           </button>
         </div>
-        <div className="back-home" onClick={() => handleSingIn()}>
+        <div className="back-home" onClick={() => handleSwitchPageHome()}>
           &#60;&#60; Go to back Home
         </div>
       </div>

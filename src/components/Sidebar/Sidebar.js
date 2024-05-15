@@ -11,12 +11,19 @@ import { FaGem, FaGithub } from "react-icons/fa";
 import { SiRiotgames } from "react-icons/si";
 import { MdDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "react-pro-sidebar/dist/css/styles.css";
 
 import sidebarBg from "../../assets/image/sidebar.jpg";
-import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.scss";
 
 function Sidebar({ image, collapsed, toggled, handleToggleSidebar }) {
+  const navigate = useNavigate();
+
+  const handleSwitchPageHome = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <ProSidebar
@@ -39,7 +46,7 @@ function Sidebar({ image, collapsed, toggled, handleToggleSidebar }) {
               whiteSpace: "nowrap",
             }}
           >
-            <div className="logo">
+            <div className="logo" onClick={() => handleSwitchPageHome()}>
               <SiRiotgames size={"2em"} />
               <div className="logo-text">
                 <span>

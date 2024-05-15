@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import "./ManageUser.scss";
+import { GoPlus } from "react-icons/go";
+
 // import ModalCreateUser from "../ModalUser/ModalCreateUser";
 // import ModalUpdateUser from "../ModalUser/ModalUpdateUser";
-import { GoPlus } from "react-icons/go";
 // import TableUser from "../TableUser/TableUser";
+
+import "./ManageUser.scss";
 import { getAllUsers, getUserWithPaginate } from "../../services/userService";
 import ModalUser from "../ModalUser/ModalUser";
 import ModalDeleteUser from "../ModalUser/ModalDeleteUser";

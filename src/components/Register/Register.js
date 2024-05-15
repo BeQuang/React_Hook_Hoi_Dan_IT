@@ -1,13 +1,19 @@
 import { useState } from "react";
-import "./Register.scss";
 import { FcGoogle } from "react-icons/fc";
 import { FaMicrosoft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import videoRegister from "../../assets/video/register-LOL.mp4";
 import { SiRiotgames } from "react-icons/si";
-import { postRegister } from "../../services/userService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import "./Register.scss";
+import videoRegister from "../../assets/video/register-LOL.mp4";
+import { postRegister } from "../../services/userService";
+import {
+  validateEmail,
+  validatePassword,
+  validateEmpty,
+} from "../Validate/Validate.js";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -15,11 +21,21 @@ function Register() {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    navigate("/login");
-  };
-
   const handleRegister = async () => {
+    // validate
+    if (!validateEmail(email)) {
+      toast.error("Invalid email");
+      return;
+    } else if (!validatePassword(password)) {
+      toast.error(
+        "Password of at least 6 characters including numbers and capital characters"
+      );
+      return;
+    } else if (!validateEmpty(username)) {
+      toast.error("Please enter the username field");
+      return;
+    }
+
     let data = await postRegister(email, password, username);
     console.log(data);
 
@@ -32,6 +48,14 @@ function Register() {
     } else {
       toast.error(data.EM);
     }
+  };
+
+  const handleSwitchPageLogin = () => {
+    navigate("/login");
+  };
+
+  const handleSwitchPageHome = () => {
+    navigate("/");
   };
 
   return (
@@ -52,7 +76,10 @@ function Register() {
       <div className="register-form">
         <div className="header">
           <span>Already have an account?</span>
-          <button className="btn-sign-in" onClick={() => handleLogin()}>
+          <button
+            className="btn-sign-in"
+            onClick={() => handleSwitchPageLogin()}
+          >
             Log in
           </button>
         </div>
@@ -106,7 +133,7 @@ function Register() {
               <FaMicrosoft /> <span>Sign up with Microsoft</span>
             </button>
           </div>
-          <div className="back-home" onClick={() => handleLogin()}>
+          <div className="back-home" onClick={() => handleSwitchPageHome()}>
             &#60;&#60; Go to back Home
           </div>
         </div>

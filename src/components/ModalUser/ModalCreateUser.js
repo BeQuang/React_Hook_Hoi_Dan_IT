@@ -2,8 +2,9 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { CgFileAdd } from "react-icons/cg";
-import "./ModalUser.scss";
 import { toast } from "react-toastify";
+
+import "./ModalUser.scss";
 import {
   validateEmail,
   validateEmpty,

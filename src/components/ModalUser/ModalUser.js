@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { CgFileAdd } from "react-icons/cg";
-import "./ModalUser.scss";
+import _ from "lodash";
 import { toast } from "react-toastify";
+
+import "./ModalUser.scss";
 import {
   validateEmail,
   validateEmpty,
   validatePassword,
 } from "../Validate/Validate";
 import { postCreateUser, putUpdateUser } from "../../services/userService";
-import _ from "lodash";
 
 function ModalUser({
   show,

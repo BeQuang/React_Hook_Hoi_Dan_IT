@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { CgFileAdd } from "react-icons/cg";
-import "./ModalUser.scss";
 import { toast } from "react-toastify";
+import _ from "lodash";
+
+import "./ModalUser.scss";
 import { validateEmpty } from "../Validate/Validate";
 import { putUpdateUser } from "../../services/userService";
-import _ from "lodash";
 
 function ModalUpdateUser({
   show,
