@@ -16,6 +16,21 @@
             color: var(--primary-color);
           }
         }
+
+        .nav-item {
+          .dropdown-menu {
+            background-color: rgba(11, 196, 226, 0.5);
+
+            .dropdown-item {
+              color: white;
+
+              &:hover {
+                background-color: var(--primary-color);
+                color: black;
+              }
+            }
+          }
+        }
       }
     }
   }

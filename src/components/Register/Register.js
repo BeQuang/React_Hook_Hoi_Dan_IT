@@ -37,7 +37,6 @@ function Register() {
     }
 
     let data = await postRegister(email, password, username);
-    console.log(data);
 
     if (data && data.EC === 0) {
       toast.success(`${data.EM}. Sign in with the account you just created`);
