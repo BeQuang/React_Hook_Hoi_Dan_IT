@@ -3,15 +3,20 @@ import { FcGoogle } from "react-icons/fc";
 import { FaMicrosoft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { ImSpinner } from "react-icons/im";
 
 import "./Login.scss";
 import { postLogin } from "../../services/userService.js";
 import { validateEmail, validatePassword } from "../Validate/Validate.js";
+import { doLogin } from "../../redux/action/userAction.js";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
     // validate
@@ -23,12 +28,16 @@ function Login() {
       return;
     }
 
+    setIsLoading(true);
     let data = await postLogin(email, password);
     if (data && data.EC === 0) {
+      dispatch(doLogin(data));
       toast.success(data.EM);
+      setIsLoading(false);
       navigate("/");
     } else {
       toast.error(data.EM);
+      setIsLoading(false);
     }
   };
 
@@ -74,8 +83,13 @@ function Login() {
         </div>
         <span className="forgot">Forgot password?</span>
         <div>
-          <button className="btn-login" onClick={() => handleLogin()}>
-            Login to Quiz LOL
+          <button
+            className="btn-login"
+            onClick={() => handleLogin()}
+            disabled={isLoading}
+          >
+            {isLoading === true && <ImSpinner className="loader-icon" />}
+            <span>Login to Quiz LOL</span>
           </button>
         </div>
         <div className="line"></div>
