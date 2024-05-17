@@ -1,5 +1,11 @@
+import ListQuiz from "../../components/ListQuiz/ListQuiz";
+
 function User() {
-  return <div>user component</div>;
+  return (
+    <div>
+      <ListQuiz />
+    </div>
+  );
 }
 
 export default User;

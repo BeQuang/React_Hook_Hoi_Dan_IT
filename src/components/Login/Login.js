@@ -7,8 +7,9 @@ import { useDispatch } from "react-redux";
 import { ImSpinner } from "react-icons/im";
 
 import "./Login.scss";
-import { postLogin } from "../../services/userService.js";
-import { validateEmail, validatePassword } from "../Validate/Validate.js";
+import { postLogin } from "../../services/authService.js";
+// import { validateEmail, validatePassword } from "../Validate/Validate.js";
+import { validateEmail } from "../Validate/Validate.js";
 import { doLogin } from "../../redux/action/userAction.js";
 
 function Login() {
@@ -23,10 +24,11 @@ function Login() {
     if (!validateEmail(email)) {
       toast.error("Invalid email");
       return;
-    } else if (!validatePassword(password)) {
-      toast.error("Incorrect password");
-      return;
     }
+    // else if (!validatePassword(password)) {
+    //   toast.error("Incorrect password");
+    //   return;
+    // }
 
     setIsLoading(true);
     let data = await postLogin(email, password);
