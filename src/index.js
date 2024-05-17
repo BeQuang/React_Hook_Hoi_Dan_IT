@@ -6,6 +6,7 @@ import store from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "./Layout";
 import { BrowserRouter } from "react-router-dom";
+import "nprogress/nprogress.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
