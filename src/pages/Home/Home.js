@@ -1,7 +1,13 @@
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import "./Home.scss";
 import videoHome from "../../assets/video/video-homepage.webm";
 
 function Home() {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const navigate = useNavigate();
+
   return (
     <div className="home-container">
       <div className="video-container">
@@ -18,7 +24,15 @@ function Home() {
           can have more emotional games.
         </p>
         <div>
-          <button className="btn-start">Get's start. It's free</button>
+          {isAuthenticated === false ? (
+            <button className="btn-start" onClick={() => navigate("/login")}>
+              Get's start. It's free
+            </button>
+          ) : (
+            <button className="btn-start" onClick={() => navigate("/users")}>
+              Doing With Now
+            </button>
+          )}
         </div>
       </div>
     </div>

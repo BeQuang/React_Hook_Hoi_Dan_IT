@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from "react";
 import { getQuizByUser } from "../../services/quizService";
+import "./ListQuiz.scss";
 
 function ListQuiz() {
   const [arrQuiz, setArrQuiz] = useState([]);
@@ -9,24 +11,39 @@ function ListQuiz() {
 
   const getQuizData = async () => {
     const res = await getQuizByUser();
-    console.log(res);
+    if (res && res.EC === 0) {
+      setArrQuiz(res.DT);
+    }
   };
   return (
-    <>
-      <div className="card" style={{ width: "18rem" }}>
-        <img className="card-img-top" src="..." alt="Card image cap" />
-        <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" className="btn btn-primary">
-            Go somewhere
-          </a>
-        </div>
-      </div>
-    </>
+    <div className="list-quiz container">
+      {arrQuiz &&
+        arrQuiz.length > 0 &&
+        arrQuiz.map((quiz, index) => {
+          return (
+            <div
+              key={`${index}-quiz`}
+              className="card"
+              style={{ width: "18rem" }}
+            >
+              <img
+                className="card-img-top"
+                src={`data:image/jpeg;base64,${quiz.image}`}
+                alt="Card image cap"
+              />
+              <div className="card-body">
+                <h5 className="card-title">Quiz {index + 1}</h5>
+                <p className="card-text">{quiz.description}</p>
+                <button className="btn btn-primary">Start now</button>
+              </div>
+            </div>
+          );
+        })}
+
+      {arrQuiz && arrQuiz.length === 0 && (
+        <div>You don't have any quiz now...</div>
+      )}
+    </div>
   );
 }
 
