@@ -9,7 +9,11 @@ import Login from "./components/Login/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Register from "./components/Register/Register";
+import DetailQuiz from "./components/ListQuiz/DetailQuiz/DetailQuiz";
 
+const NotFound = () => {
+  return <div className="alert alert-danger">404. NotFound</div>;
+};
 function Layout() {
   return (
     <>
@@ -19,12 +23,16 @@ function Layout() {
           <Route index element={<Home />} />
           <Route path="users" element={<User />} />
         </Route>
+        <Route path="/quiz/:id" element={<DetailQuiz />} />
+
         <Route path="/admins" element={<Admin />}>
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
         </Route>
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer
         position="top-center"
