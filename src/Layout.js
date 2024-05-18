@@ -9,7 +9,7 @@ import Login from "./components/Login/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Register from "./components/Register/Register";
-import DetailQuiz from "./components/ListQuiz/DetailQuiz/DetailQuiz";
+import DetailQuiz from "./components/DetailQuiz/DetailQuiz";
 
 const NotFound = () => {
   return <div className="alert alert-danger">404. NotFound</div>;
