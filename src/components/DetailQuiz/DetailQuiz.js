@@ -1,14 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import _ from "lodash";
 
 import "./DetailQuiz.scss";
 import { getDataQuiz } from "../../services/questionsService";
+import QuestionItem from "./QuestionItem/QuestionItem";
 
 function DetailQuiz() {
   const params = useParams();
   const location = useLocation();
   const quizId = params.id;
+  const [dataQuiz, setDataQuiz] = useState([]);
+  const [index, setIndex] = useState(0);
+
+  const handlePrev = () => {
+    if (index - 1 < 0) return;
+    setIndex(index - 1);
+  };
+  const handleNext = () => {
+    if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1);
+  };
 
   useEffect(() => {
     fetchQuestions();
@@ -40,9 +51,11 @@ function DetailQuiz() {
           return { questionId: key, answers, questionsDescription, image };
         })
         .value();
-      console.log("check data >>>>", data);
+      setDataQuiz(data);
     }
   };
+
+  // console.log("check >>>>>", dataQuiz, dataQuiz[index]);
 
   return (
     <div className="detail-quiz container">
@@ -51,20 +64,17 @@ function DetailQuiz() {
           Quiz {quizId}: {location?.state.quizTitle}
         </div>
         <hr />
-        <div className="body">
-          <img />
-        </div>
-        <div className="content">
-          <div className="question">Question 1: How are you doing?</div>
-          <div className="answer-list">
-            <div className="answer-item">A. haha</div>
-            <div className="answer-item">B. hehe</div>
-            <div className="answer-item">C. hihi</div>
-          </div>
-        </div>
+        <QuestionItem
+          index={index}
+          data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
+        />
         <div className="footer">
-          <button className="btn btn-secondary">Prev</button>
-          <button className="btn btn-info">Next</button>
+          <button className="btn btn-secondary" onClick={() => handlePrev()}>
+            Prev
+          </button>
+          <button className="btn btn-info" onClick={() => handleNext()}>
+            Next
+          </button>
         </div>
       </div>
       <div className="right-content">countdown</div>
