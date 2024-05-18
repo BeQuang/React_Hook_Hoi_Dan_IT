@@ -18,7 +18,7 @@ function QuestionItem({ index, data }) {
       )}
       <div className="content">
         <div className="question">
-          Question {index + 1}: {data.questionDescription}
+          Question {index + 1}: {data.questionsDescription}
         </div>
         <div className="answer-list">
           {data.answers &&

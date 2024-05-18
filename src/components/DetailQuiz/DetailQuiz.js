@@ -13,14 +13,6 @@ function DetailQuiz() {
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
 
-  const handlePrev = () => {
-    if (index - 1 < 0) return;
-    setIndex(index - 1);
-  };
-  const handleNext = () => {
-    if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1);
-  };
-
   useEffect(() => {
     fetchQuestions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,6 +49,16 @@ function DetailQuiz() {
 
   // console.log("check >>>>>", dataQuiz, dataQuiz[index]);
 
+  const handlePrev = () => {
+    if (index - 1 < 0) return;
+    setIndex(index - 1);
+  };
+  const handleNext = () => {
+    if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1);
+  };
+
+  const handleFinish = () => {};
+
   return (
     <div className="detail-quiz container">
       <div className="left-content">
@@ -74,6 +76,9 @@ function DetailQuiz() {
           </button>
           <button className="btn btn-info" onClick={() => handleNext()}>
             Next
+          </button>
+          <button className="btn btn-warning" onClick={() => handleFinish()}>
+            Finish
           </button>
         </div>
       </div>
