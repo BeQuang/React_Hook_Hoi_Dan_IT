@@ -5,6 +5,8 @@ import _ from "lodash";
 import "./DetailQuiz.scss";
 import { getDataQuiz } from "../../services/questionsService";
 import QuestionItem from "./QuestionItem/QuestionItem";
+import { postSubmitAnswer } from "../../services/answerService";
+import ModalResult from "../ModalQuiz/ModalResult";
 
 function DetailQuiz() {
   const params = useParams();
@@ -12,6 +14,8 @@ function DetailQuiz() {
   const quizId = params.id;
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
+  const [isShowModalResult, setIsShowModalResult] = useState(false);
+  const [dataModalResult, setDataModalResult] = useState({});
 
   useEffect(() => {
     fetchQuestions();
@@ -58,8 +62,7 @@ function DetailQuiz() {
     if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1);
   };
 
-  const handleFinish = () => {
-    console.log("check data before finish >>>>", dataQuiz);
+  const handleFinish = async () => {
     let payload = {
       quizId: +quizId,
       answers: [],
@@ -86,7 +89,19 @@ function DetailQuiz() {
     }
 
     payload.answers = answers;
-    console.log(payload);
+
+    const res = await postSubmitAnswer(payload);
+    if (res && res.EC === 0) {
+      setDataModalResult({
+        countCorrect: res.DT.countCorrect,
+        countTotal: res.DT.countTotal,
+        quizData: res.DT.quizData,
+      });
+      setIsShowModalResult(true);
+      console.log(res);
+    } else {
+      alert("something wrongs.......");
+    }
   };
 
   const handleStateCheckBox = (answerId, questionId) => {
@@ -139,6 +154,11 @@ function DetailQuiz() {
         </div>
       </div>
       <div className="right-content">countdown</div>
+      <ModalResult
+        show={isShowModalResult}
+        setShow={setIsShowModalResult}
+        dataModalResult={dataModalResult}
+      />
     </div>
   );
 }
