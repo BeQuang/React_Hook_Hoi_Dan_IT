@@ -10,8 +10,7 @@ import {
 import { FaGem, FaGithub } from "react-icons/fa";
 import { SiRiotgames } from "react-icons/si";
 import { MdDashboard } from "react-icons/md";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 
 import sidebarBg from "../../assets/image/sidebar.jpg";
@@ -68,7 +67,9 @@ function Sidebar({ image, collapsed, toggled, handleToggleSidebar }) {
               <MenuItem>
                 Users manage <Link to="/admins/manage-users" />
               </MenuItem>
-              <MenuItem>Quizzes manage</MenuItem>
+              <MenuItem>
+                Quizzes manage <Link to="/admins/manage-quizzes" />
+              </MenuItem>
               <MenuItem>Questions manage</MenuItem>
             </SubMenu>
           </Menu>
