@@ -4,4 +4,14 @@ const getQuizByUser = () => {
   return axios.get("quiz-by-participant");
 };
 
-export { getQuizByUser };
+const postCreateNewQuiz = (name, description, type, image) => {
+  const data = new FormData();
+  data.append("name", name);
+  data.append("description", description);
+  data.append("difficulty", type);
+  data.append("quizImage", image);
+
+  return axios.post("quiz", data);
+};
+
+export { getQuizByUser, postCreateNewQuiz };
