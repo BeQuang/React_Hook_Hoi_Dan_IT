@@ -58,7 +58,36 @@ function DetailQuiz() {
     if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1);
   };
 
-  const handleFinish = () => {};
+  const handleFinish = () => {
+    console.log("check data before finish >>>>", dataQuiz);
+    let payload = {
+      quizId: +quizId,
+      answers: [],
+    };
+
+    let answers = [];
+
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach((question) => {
+        let questionId = question.questionId;
+        let userAnswerId = [];
+
+        question.answers.forEach((answer) => {
+          if (answer.isSelected === true) {
+            userAnswerId.push(answer.id);
+          }
+        });
+
+        answers.push({
+          questionId: +questionId,
+          userAnswerId,
+        });
+      });
+    }
+
+    payload.answers = answers;
+    console.log(payload);
+  };
 
   const handleStateCheckBox = (answerId, questionId) => {
     let dataQuizClone = _.cloneDeep(dataQuiz); // React-Hook doesn't merge state
