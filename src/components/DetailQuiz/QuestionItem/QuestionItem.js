@@ -3,18 +3,23 @@ import _ from "lodash";
 
 import "./QuestionItem.scss";
 
-function QuestionItem({ index, data }) {
-  console.log(data);
+function QuestionItem({ index, data, handleStateCheckBox }) {
   if (_.isEmpty(data)) {
     return <></>;
   }
 
+  const handleCheckBox = (e, answerId, questionId) => {
+    handleStateCheckBox(answerId, questionId);
+  };
+
   return (
     <div className="question-item">
-      {data.image && (
+      {data.image ? (
         <div className="body">
           <img src={`data:image/jpeg;base64,${data.image}`} />
         </div>
+      ) : (
+        <div className="body"></div>
       )}
       <div className="content">
         <div className="question">
@@ -30,7 +35,10 @@ function QuestionItem({ index, data }) {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      value=""
+                      checked={answer.isSelected}
+                      onChange={(e) =>
+                        handleCheckBox(e, answer.id, data.questionId)
+                      }
                     />
                     <label className="form-check-label">
                       {answer.description}
