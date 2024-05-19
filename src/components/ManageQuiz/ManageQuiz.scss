@@ -1,10 +1,7 @@
 .manage-quiz {
-  padding: 16px;
-
   .title {
     font-size: 24px;
     font-weight: 600;
-    padding-bottom: 16px;
   }
 
   .add-new {
@@ -12,5 +9,11 @@
   }
 
   .list-detail {
+    margin-top: 24px;
+
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+    }
   }
 }
