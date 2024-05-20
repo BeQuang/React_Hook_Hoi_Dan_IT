@@ -12,6 +12,7 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import DetailQuiz from "./components/DetailQuiz/DetailQuiz";
 import ManageQuiz from "./components/ManageQuiz/ManageQuiz";
+import ManageQuestions from "./components/ManageQuestion/ManageQuestions";
 
 const NotFound = () => {
   return <div className="alert alert-danger">404. NotFound</div>;
@@ -31,6 +32,7 @@ function Layout() {
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
           <Route path="manage-quizzes" element={<ManageQuiz />} />
+          <Route path="manage-questions" element={<ManageQuestions />} />
         </Route>
 
         <Route path="/login" element={<Login />} />

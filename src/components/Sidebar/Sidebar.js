@@ -70,7 +70,9 @@ function Sidebar({ image, collapsed, toggled, handleToggleSidebar }) {
               <MenuItem>
                 Quizzes manage <Link to="/admins/manage-quizzes" />
               </MenuItem>
-              <MenuItem>Questions manage</MenuItem>
+              <MenuItem>
+                Questions manage <Link to="/admins/manage-questions" />
+              </MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>
