@@ -81,6 +81,50 @@ function ManageQuestions() {
     }
   };
 
+  const handleOnChange = (type, questionId, value) => {
+    if (type === "QUESTION") {
+      let questionsClone = _.cloneDeep(questions);
+
+      let index = questionsClone.findIndex((item) => item.id === questionId);
+      if (index !== -1) {
+        questionsClone[index].description = value;
+        setQuestions(questionsClone);
+      }
+    }
+  };
+
+  const handleOnChangeFileQuestion = (questionId, e) => {
+    let questionsClone = _.cloneDeep(questions);
+    let index = questionsClone.findIndex((item) => item.id === questionId);
+    if (index !== -1 && e.target && e.target.files && e.target.files[0]) {
+      questionsClone[index].imageFile = e.target.files[0];
+      questionsClone[index].imageName = e.target.files[0].name;
+      setQuestions(questionsClone);
+    }
+  };
+
+  const handleAnswerQuestion = (type, questionId, answerId, value) => {
+    let questionsClone = _.cloneDeep(questions);
+    let index = questionsClone.findIndex((item) => item.id === questionId);
+
+    if (index > -1) {
+      questionsClone[index].answers = questionsClone[index].answers.map(
+        (answer) => {
+          if (answer.id === answerId) {
+            if (type === "CHECKBOX") {
+              answer.isCorrect = value;
+            } else if (type === "INPUT") {
+              answer.description = value;
+            }
+            return answer;
+          }
+        }
+      );
+    }
+  };
+
+  const handleSubmitQuestionForQuiz = () => {};
+
   return (
     <div className="manage-questions">
       <div className="title">ManageQuestions</div>
@@ -108,15 +152,29 @@ function ManageQuestions() {
                       type="text"
                       className="form-control"
                       placeholder="Description"
+                      onChange={(e) =>
+                        handleOnChange("QUESTION", question.id, e.target.value)
+                      }
                     />
                     <label>Questions {index + 1}'s Description</label>
                   </div>
                   <div className="group-upload">
-                    <label className="label-upload">
+                    <label htmlFor={`${question.id}`} className="label-upload">
                       <RiImageAddFill />
                     </label>
-                    <input type="file" hidden />
-                    <span>myImage.png</span>
+                    <input
+                      id={`${question.id}`}
+                      type="file"
+                      hidden
+                      onChange={(e) =>
+                        handleOnChangeFileQuestion(question.id, e)
+                      }
+                    />
+                    <span>
+                      {question.imageName
+                        ? question.imageName
+                        : "No files available"}
+                    </span>
                   </div>
                   <div className="btn-group">
                     <span
@@ -146,6 +204,15 @@ function ManageQuestions() {
                         <input
                           className="form-check-input isCorrect"
                           type="checkbox"
+                          checked={answer.isCorrect}
+                          onChange={(e) =>
+                            handleAnswerQuestion(
+                              "CHECKBOX",
+                              question.id,
+                              answer.id,
+                              e.target.checked
+                            )
+                          }
                         />
                         <div className="form-floating name">
                           <input
@@ -153,6 +220,14 @@ function ManageQuestions() {
                             className="form-control"
                             id="floatingInput"
                             placeholder="Answer 1"
+                            onChange={(e) =>
+                              handleAnswerQuestion(
+                                "INPUT",
+                                question.id,
+                                answer.id,
+                                e.target.value
+                              )
+                            }
                           />
                           <label>Answer {index + 1}</label>
                         </div>
@@ -186,6 +261,14 @@ function ManageQuestions() {
               </div>
             );
           })}
+        <div className="btn-save">
+          <button
+            className="btn btn-info"
+            onClick={() => handleSubmitQuestionForQuiz()}
+          >
+            Save Questions
+          </button>
+        </div>
       </div>
     </div>
   );
