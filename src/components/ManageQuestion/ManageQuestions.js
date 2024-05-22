@@ -5,6 +5,7 @@ import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { RiImageAddFill } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
+import Lightbox from "react-awesome-lightbox";
 
 import "./ManageQuestions.scss";
 
@@ -16,6 +17,10 @@ function ManageQuestions() {
   ];
 
   const [selectedQuiz, setSelectedQuiz] = useState({});
+  const [dataImagePreview, setDataImagePreview] = useState({
+    title: "",
+    url: "",
+  });
 
   const [questions, setQuestions] = useState([
     {
@@ -32,6 +37,8 @@ function ManageQuestions() {
       ],
     },
   ]);
+
+  const [isPreviewImage, setIsPreviewImage] = useState(false);
 
   const handleAddRemoveQuestion = (type, id) => {
     if (type === "ADD") {
@@ -109,6 +116,7 @@ function ManageQuestions() {
 
     if (index > -1) {
       questionsClone[index].answers = questionsClone[index].answers.map(
+        // eslint-disable-next-line array-callback-return
         (answer) => {
           if (answer.id === answerId) {
             if (type === "CHECKBOX") {
@@ -124,6 +132,14 @@ function ManageQuestions() {
   };
 
   const handleSubmitQuestionForQuiz = () => {};
+
+  const handleImagePreview = (title, imageFile) => {
+    setDataImagePreview({
+      title,
+      url: URL.createObjectURL(imageFile),
+    });
+    setIsPreviewImage(true);
+  };
 
   return (
     <div className="manage-questions">
@@ -171,9 +187,21 @@ function ManageQuestions() {
                       }
                     />
                     <span>
-                      {question.imageName
-                        ? question.imageName
-                        : "No files available"}
+                      {question.imageName ? (
+                        <span
+                          className="pointer"
+                          onClick={() =>
+                            handleImagePreview(
+                              question.imageName,
+                              question.imageFile
+                            )
+                          }
+                        >
+                          {question.imageName}
+                        </span>
+                      ) : (
+                        "No files available"
+                      )}
                     </span>
                   </div>
                   <div className="btn-group">
@@ -269,6 +297,13 @@ function ManageQuestions() {
             Save Questions
           </button>
         </div>
+        {isPreviewImage === true && (
+          <Lightbox
+            image={dataImagePreview.url}
+            title={dataImagePreview.title}
+            onClose={() => setIsPreviewImage(false)}
+          ></Lightbox>
+        )}
       </div>
     </div>
   );
