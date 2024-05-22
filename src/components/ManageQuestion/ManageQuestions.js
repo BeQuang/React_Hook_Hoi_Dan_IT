@@ -6,11 +6,13 @@ import { RiImageAddFill } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
+import { toast } from "react-toastify";
 
 import "./ManageQuestions.scss";
 import { getAllQuizForAdmin } from "../../services/quizService";
 import { postCreateNewQuestionForQuiz } from "../../services/questionsService";
 import { postCreateNewAnswerForQuestion } from "../../services/answerService";
+import { validAnswers, validQuestions } from "../Validate/Validate";
 
 function ManageQuestions() {
   const [dataImagePreview, setDataImagePreview] = useState({
@@ -18,7 +20,7 @@ function ManageQuestions() {
     url: "",
   });
 
-  const [questions, setQuestions] = useState([
+  const INIT_QUESTIONS = [
     {
       id: uuidv4(),
       description: "",
@@ -32,7 +34,8 @@ function ManageQuestions() {
         },
       ],
     },
-  ]);
+  ];
+  const [questions, setQuestions] = useState(INIT_QUESTIONS);
 
   const [selectedQuiz, setSelectedQuiz] = useState({});
   const [isPreviewImage, setIsPreviewImage] = useState(false);
@@ -150,28 +153,76 @@ function ManageQuestions() {
   };
 
   const handleSubmitQuestionForQuiz = async () => {
-    //submit Questions
-    await Promise.all(
-      questions.map(async (question) => {
-        const createQuestion = await postCreateNewQuestionForQuiz(
-          +selectedQuiz.value,
-          question.description,
-          question.imageFile
-        );
-        await Promise.all(
-          question.answers.map(async (answer) => {
-            await postCreateNewAnswerForQuestion(
-              answer.description,
-              answer.isCorrect,
-              createQuestion.DT.id
-            );
-          })
-        );
-        console.log("check res >>>>>", createQuestion);
-      })
-    );
+    // todo and validate
+    if (_.isEmpty(selectedQuiz)) {
+      toast.error("Please choose a Quiz");
+      return;
+    }
 
-    //submit Answers
+    // Validate answers
+    const validAnswer = validAnswers(questions);
+
+    if (!validAnswer.isValidAnswer) {
+      toast.error(
+        `Not empty Answer ${validAnswer.indexAnswer} at Question ${validAnswer.indexQuestion}`
+      );
+      return;
+    } else if (!validAnswer.isValidAnswerCorrect) {
+      toast.error(
+        `Choose at least one correct answer in the question ${validAnswer.indexQuestion}`
+      );
+      return;
+    }
+
+    // Validate Question
+    const validQuestion = validQuestions(questions);
+
+    if (!validQuestion.isValidQuestion) {
+      toast.error(`Not empty description for Question ${validQuestion.indexQ}`);
+      return;
+    }
+
+    // submit Questions use Promise.all()
+    // await Promise.all(
+    //   questions.map(async (question) => {
+    //     const createQuestion = await postCreateNewQuestionForQuiz(
+    //       +selectedQuiz.value,
+    //       question.description,
+    //       question.imageFile
+    //     );
+    // submit Answer
+    //     await Promise.all(
+    //       question.answers.map(async (answer) => {
+    //         await postCreateNewAnswerForQuestion(
+    //           answer.description,
+    //           answer.isCorrect,
+    //           createQuestion.DT.id
+    //         );
+    //       })
+    //     );
+    //     console.log("check res >>>>>", createQuestion);
+    //   })
+    // );
+
+    // submit Question use for ... of ...
+    for (const question of questions) {
+      const createQuestion = await postCreateNewQuestionForQuiz(
+        +selectedQuiz.value,
+        question.description,
+        question.imageFile
+      );
+      // submit Answer
+      for (const answer of question.answers) {
+        await postCreateNewAnswerForQuestion(
+          answer.description,
+          answer.isCorrect,
+          createQuestion.DT.id
+        );
+      }
+    }
+
+    toast.success("Created Questions and Answers successfully!");
+    setQuestions(INIT_QUESTIONS);
   };
 
   const handleImagePreview = (title, imageFile) => {
