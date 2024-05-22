@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import { BsPatchPlusFill, BsPatchMinusFill } from "react-icons/bs";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
@@ -8,14 +8,9 @@ import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
 
 import "./ManageQuestions.scss";
+import { getAllQuizForAdmin } from "../../services/quizService";
 
 function ManageQuestions() {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
   const [selectedQuiz, setSelectedQuiz] = useState({});
   const [dataImagePreview, setDataImagePreview] = useState({
     title: "",
@@ -39,6 +34,25 @@ function ManageQuestions() {
   ]);
 
   const [isPreviewImage, setIsPreviewImage] = useState(false);
+
+  const [listQuiz, setListQuiz] = useState([]);
+
+  useEffect(() => {
+    fetchAllQuiz();
+  }, []);
+
+  const fetchAllQuiz = async () => {
+    const res = await getAllQuizForAdmin();
+    if (res && res.EC === 0) {
+      let newOptionsQuiz = res.DT.map((item) => {
+        return {
+          value: item.id,
+          label: `${item.id}: ${item.description}`,
+        };
+      });
+      setListQuiz(newOptionsQuiz);
+    }
+  };
 
   const handleAddRemoveQuestion = (type, id) => {
     if (type === "ADD") {
@@ -151,7 +165,7 @@ function ManageQuestions() {
         <Select
           defaultValue={selectedQuiz}
           onChange={setSelectedQuiz}
-          options={options}
+          options={listQuiz}
           className="col-6"
         />
       </div>
