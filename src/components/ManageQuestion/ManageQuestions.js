@@ -9,9 +9,10 @@ import Lightbox from "react-awesome-lightbox";
 
 import "./ManageQuestions.scss";
 import { getAllQuizForAdmin } from "../../services/quizService";
+import { postCreateNewQuestionForQuiz } from "../../services/questionsService";
+import { postCreateNewAnswerForQuestion } from "../../services/answerService";
 
 function ManageQuestions() {
-  const [selectedQuiz, setSelectedQuiz] = useState({});
   const [dataImagePreview, setDataImagePreview] = useState({
     title: "",
     url: "",
@@ -33,8 +34,8 @@ function ManageQuestions() {
     },
   ]);
 
+  const [selectedQuiz, setSelectedQuiz] = useState({});
   const [isPreviewImage, setIsPreviewImage] = useState(false);
-
   const [listQuiz, setListQuiz] = useState([]);
 
   useEffect(() => {
@@ -135,17 +136,43 @@ function ManageQuestions() {
           if (answer.id === answerId) {
             if (type === "CHECKBOX") {
               answer.isCorrect = value;
-            } else if (type === "INPUT") {
+            }
+            if (type === "INPUT") {
               answer.description = value;
             }
-            return answer;
           }
+          return answer;
         }
       );
     }
+
+    setQuestions(questionsClone);
   };
 
-  const handleSubmitQuestionForQuiz = () => {};
+  const handleSubmitQuestionForQuiz = async () => {
+    //submit Questions
+    await Promise.all(
+      questions.map(async (question) => {
+        const createQuestion = await postCreateNewQuestionForQuiz(
+          +selectedQuiz.value,
+          question.description,
+          question.imageFile
+        );
+        await Promise.all(
+          question.answers.map(async (answer) => {
+            await postCreateNewAnswerForQuestion(
+              answer.description,
+              answer.isCorrect,
+              createQuestion.DT.id
+            );
+          })
+        );
+        console.log("check res >>>>>", createQuestion);
+      })
+    );
+
+    //submit Answers
+  };
 
   const handleImagePreview = (title, imageFile) => {
     setDataImagePreview({
