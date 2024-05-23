@@ -7,6 +7,8 @@ import "./ManageQuiz.scss";
 import { postCreateNewQuiz } from "../../services/quizService";
 import { validateEmpty } from "../Validate/Validate";
 import TableQuiz from "../TableQuiz/TableQuiz";
+import QuizQA from "../QuizQA/QuizQA";
+import AssignQuiz from "../AssignQuiz/AssignQuiz";
 
 const options = [
   { value: "EASY", label: "EASY" },
@@ -119,6 +121,30 @@ function ManageQuiz() {
             </Accordion.Header>
             <Accordion.Body>
               <TableQuiz />
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </div>
+      <div className="update-qa">
+        <Accordion>
+          <Accordion.Item eventKey="2">
+            <Accordion.Header>
+              <div className="title">Update Q/A Quiz</div>
+            </Accordion.Header>
+            <Accordion.Body>
+              <QuizQA />
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </div>
+      <div className="assign">
+        <Accordion>
+          <Accordion.Item eventKey="3">
+            <Accordion.Header>
+              <div className="title">Assign to User</div>
+            </Accordion.Header>
+            <Accordion.Body>
+              <AssignQuiz />
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

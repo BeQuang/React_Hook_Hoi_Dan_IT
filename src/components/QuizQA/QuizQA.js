@@ -8,13 +8,13 @@ import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 
-import "./ManageQuestions.scss";
+import "./QuizQA.scss";
 import { getAllQuizForAdmin } from "../../services/quizService";
 import { postCreateNewQuestionForQuiz } from "../../services/questionsService";
 import { postCreateNewAnswerForQuestion } from "../../services/answerService";
 import { validAnswers, validQuestions } from "../Validate/Validate";
 
-function ManageQuestions() {
+function QuizQA() {
   const [dataImagePreview, setDataImagePreview] = useState({
     title: "",
     url: "",
@@ -235,8 +235,6 @@ function ManageQuestions() {
 
   return (
     <div className="manage-questions">
-      <div className="title">ManageQuestions</div>
-      <hr />
       <div className="add-questions">
         <div className="col-6 form-group">
           <label className="mb-2">Select Quiz:</label>
@@ -402,4 +400,4 @@ function ManageQuestions() {
   );
 }
 
-export default ManageQuestions;
+export default QuizQA;
