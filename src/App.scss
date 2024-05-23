@@ -36,3 +36,9 @@ body {
     max-width: 1700px !important;
   }
 }
+
+.app-container {
+  .app-content {
+    height: calc(100vh - 60px);
+  }
+}

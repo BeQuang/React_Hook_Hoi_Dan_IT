@@ -33,10 +33,15 @@ const deleteQuizForAdmin = (id) => {
   return axios.delete(`quiz/${id}`);
 };
 
+const postAssignQuiz = (quizId, userId) => {
+  return axios.post("quiz-assign-to-user", { quizId, userId });
+};
+
 export {
   getQuizByUser,
   postCreateNewQuiz,
   getAllQuizForAdmin,
   putUpdateQuizForAdmin,
   deleteQuizForAdmin,
+  postAssignQuiz,
 };

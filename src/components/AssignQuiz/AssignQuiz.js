@@ -1,8 +1,9 @@
 import Select from "react-select";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import "./AssignQuiz.scss";
-import { getAllQuizForAdmin } from "../../services/quizService";
+import { getAllQuizForAdmin, postAssignQuiz } from "../../services/quizService";
 import { getAllUsers } from "../../services/userService";
 
 function AssignQuiz() {
@@ -22,7 +23,7 @@ function AssignQuiz() {
       let newOptionsQuiz = res.DT.map((item) => {
         return {
           value: item.id,
-          label: `${item.id}: ${item.description}`,
+          label: `${item.id}: ${item.name}`,
         };
       });
       setListQuiz(newOptionsQuiz);
@@ -39,6 +40,15 @@ function AssignQuiz() {
         };
       });
       setListUser(newOptionsUser);
+    }
+  };
+
+  const handleAssign = async () => {
+    const res = await postAssignQuiz(selectedQuiz.value, selectedUser.value);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+    } else {
+      toast.error(res.EM);
     }
   };
 
@@ -64,7 +74,9 @@ function AssignQuiz() {
         />
       </div>
       <div>
-        <button className="btn btn-info mt-3">Assign</button>
+        <button className="btn btn-info mt-3" onClick={() => handleAssign()}>
+          Assign
+        </button>
       </div>
     </div>
   );
