@@ -41,6 +41,10 @@ const getQuizWithQA = (quizId) => {
   return axios.get(`quiz-with-qa/${quizId}`);
 };
 
+const postUpSertQA = (data) => {
+  return axios.post("quiz-upsert-qa", { ...data });
+};
+
 export {
   getQuizByUser,
   postCreateNewQuiz,
@@ -49,4 +53,5 @@ export {
   deleteQuizForAdmin,
   postAssignQuiz,
   getQuizWithQA,
+  postUpSertQA,
 };
