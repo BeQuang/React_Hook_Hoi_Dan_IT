@@ -14,5 +14,9 @@
       height: 40px;
       border: 1px solid red;
     }
+
+    .admin-main {
+      height: calc(100vh - 40px);
+    }
   }
 }

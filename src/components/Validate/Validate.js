@@ -1,4 +1,4 @@
-export const validateEmail = (email) => {
+const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
     .match(
@@ -6,7 +6,7 @@ export const validateEmail = (email) => {
     );
 };
 
-export const validatePassword = (password) => {
+const validatePassword = (password) => {
   var MinLength = 6;
 
   var meetsLengthRequirements = password.length >= MinLength;
@@ -38,9 +38,68 @@ export const validatePassword = (password) => {
   return isValid;
 };
 
-export const validateEmpty = (value) => {
+const validateEmpty = (value) => {
   if (!value) {
     return false;
   }
   return true;
+};
+
+const validAnswers = (questions) => {
+  let countAnswerCorrect = 0;
+  let validAnswers = {
+    isValidAnswer: true,
+    isValidAnswerCorrect: true,
+    indexQuestion: 0,
+    indexAnswer: 0,
+  };
+
+  for (let i = 0; i < questions.length; i++) {
+    for (let j = 0; j < questions[i].answers.length; j++) {
+      if (questions[i].answers[j].isCorrect === true) {
+        countAnswerCorrect++;
+      }
+      if (!questions[i].answers[j].description) {
+        validAnswers.isValidAnswer = false;
+        validAnswers.indexAnswer = j + 1;
+        break;
+      }
+    }
+    validAnswers.indexQuestion = i + 1;
+    if (validAnswers.isValidAnswer === false) {
+      break;
+    }
+    if (countAnswerCorrect === 0) {
+      validAnswers.isValidAnswerCorrect = false;
+      break;
+    }
+    countAnswerCorrect = 0;
+  }
+
+  return validAnswers;
+};
+
+const validQuestions = (questions) => {
+  let validQuestion = {
+    isValidQuestion: true,
+    indexQ: 0,
+  };
+
+  for (let i = 0; i < questions.length; i++) {
+    if (!questions[i].description) {
+      validQuestion.isValidQuestion = false;
+      validQuestion.indexQ = i + 1;
+      break;
+    }
+  }
+
+  return validQuestion;
+};
+
+export {
+  validateEmpty,
+  validateEmail,
+  validatePassword,
+  validAnswers,
+  validQuestions,
 };

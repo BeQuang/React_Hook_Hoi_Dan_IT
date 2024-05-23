@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./Register.scss";
 import videoRegister from "../../assets/video/register-LOL.mp4";
-import { postRegister } from "../../services/userService";
+import { postRegister } from "../../services/authService.js";
 import {
   validateEmail,
   validatePassword,
