@@ -9,7 +9,7 @@ import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 
 import "./QuizQA.scss";
-import { getAllQuizForAdmin } from "../../services/quizService";
+import { getAllQuizForAdmin, getQuizWithQA } from "../../services/quizService";
 import { postCreateNewQuestionForQuiz } from "../../services/questionsService";
 import { postCreateNewAnswerForQuestion } from "../../services/answerService";
 import { validAnswers, validQuestions } from "../Validate/Validate";
@@ -45,6 +45,13 @@ function QuizQA() {
     fetchAllQuiz();
   }, []);
 
+  useEffect(() => {
+    if (selectedQuiz && selectedQuiz.value) {
+      fetchQuizWithQA();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedQuiz]);
+
   const fetchAllQuiz = async () => {
     const res = await getAllQuizForAdmin();
     if (res && res.EC === 0) {
@@ -55,6 +62,48 @@ function QuizQA() {
         };
       });
       setListQuiz(newOptionsQuiz);
+    }
+  };
+
+  // return a promise that resolves with a File instance
+  function urltoFile(url, filename, mimeType) {
+    if (url.startsWith("data:")) {
+      var arr = url.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[arr.length - 1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      var file = new File([u8arr], filename, { type: mime || mimeType });
+      return Promise.resolve(file);
+    }
+    return fetch(url)
+      .then((res) => res.arrayBuffer())
+      .then((buf) => new File([buf], filename, { type: mimeType }));
+  }
+
+  const fetchQuizWithQA = async () => {
+    let res = await getQuizWithQA(selectedQuiz.value);
+    if (res && res.EC === 0) {
+      // convert base64 to File Object
+      let newQA = [];
+      for (let i = 0; i < res.DT.qa.length; i++) {
+        let question = res.DT.qa[i];
+        if (question.imageFile) {
+          question.imageName = `Questions-${question.id}.png`;
+          question.imageFile = await urltoFile(
+            `data:image/png;base64,${question.imageFile}`,
+            `Questions-${question.id}.png`,
+            "image/png"
+          );
+        }
+        newQA.push(question);
+      }
+
+      setQuestions(newQA);
+      console.log(newQA);
     }
   };
 
@@ -259,6 +308,7 @@ function QuizQA() {
                       type="text"
                       className="form-control"
                       placeholder="Description"
+                      value={question.description}
                       onChange={(e) =>
                         handleOnChange("QUESTION", question.id, e.target.value)
                       }
@@ -339,6 +389,7 @@ function QuizQA() {
                             className="form-control"
                             id="floatingInput"
                             placeholder="Answer 1"
+                            value={answer.description}
                             onChange={(e) =>
                               handleAnswerQuestion(
                                 "INPUT",

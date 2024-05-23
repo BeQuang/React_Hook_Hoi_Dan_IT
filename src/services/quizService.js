@@ -37,6 +37,10 @@ const postAssignQuiz = (quizId, userId) => {
   return axios.post("quiz-assign-to-user", { quizId, userId });
 };
 
+const getQuizWithQA = (quizId) => {
+  return axios.get(`quiz-with-qa/${quizId}`);
+};
+
 export {
   getQuizByUser,
   postCreateNewQuiz,
@@ -44,4 +48,5 @@ export {
   putUpdateQuizForAdmin,
   deleteQuizForAdmin,
   postAssignQuiz,
+  getQuizWithQA,
 };
