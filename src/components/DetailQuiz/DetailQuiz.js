@@ -155,7 +155,11 @@ function DetailQuiz() {
         </div>
       </div>
       <div className="right-content">
-        <QuestionBoard dataQuiz={dataQuiz} handleFinish={handleFinish} />
+        <QuestionBoard
+          dataQuiz={dataQuiz}
+          handleFinish={handleFinish}
+          setIndex={setIndex}
+        />
       </div>
       <ModalResult
         show={isShowModalResult}
