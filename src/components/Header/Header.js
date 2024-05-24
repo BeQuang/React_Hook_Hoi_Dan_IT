@@ -3,14 +3,18 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import "./Header.scss";
+import { postLogout } from "../../services/authService";
+import { doLogout } from "../../redux/action/userAction";
 
 const Header = () => {
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  // const account = useSelector((state) => state.user.account);
+  const account = useSelector((state) => state.user.account);
+  const dispatch = useDispatch();
 
   const handleLogin = () => {
     navigate("/login");
@@ -18,6 +22,18 @@ const Header = () => {
 
   const handleRegister = () => {
     navigate("/register");
+  };
+
+  const handleLogOut = async () => {
+    const res = await postLogout(account.email, account.refresh_token);
+
+    if (res && res.EC === 0) {
+      // clear data redux
+      dispatch(doLogout());
+      navigate("/login");
+    } else {
+      toast.error(res.EM);
+    }
   };
 
   return (
@@ -39,9 +55,6 @@ const Header = () => {
             <NavLink to="/admins" className="nav-link">
               Admin
             </NavLink>
-            {/* <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/users">Users</Nav.Link>
-            <Nav.Link href="/admins">Admin</Nav.Link> */}
           </Nav>
           <Nav>
             {isAuthenticated === false ? (
@@ -55,8 +68,10 @@ const Header = () => {
               </>
             ) : (
               <NavDropdown title="Settings" id="basic-nav-dropdown">
-                <NavDropdown.Item>Log out</NavDropdown.Item>
                 <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleLogOut()}>
+                  Log out
+                </NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>

@@ -8,4 +8,8 @@ const postRegister = (email, password, username) => {
   return axios.post("register", { email, password, username });
 };
 
-export { postLogin, postRegister };
+const postLogout = (email, refresh_token) => {
+  return axios.post("logout", { email, refresh_token });
+};
+
+export { postLogin, postRegister, postLogout };
