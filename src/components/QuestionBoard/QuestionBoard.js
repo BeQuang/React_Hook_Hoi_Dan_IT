@@ -1,10 +1,14 @@
+import Countdown from "../Countdown/Countdown";
 import "./QuestionBoard.scss";
 
-function QuestionBoard({ dataQuiz }) {
+function QuestionBoard({ dataQuiz, handleFinish }) {
   console.log(dataQuiz);
+
   return (
     <div className="question-board">
-      <div className="countdown">10:10</div>
+      <div className="countdown">
+        <Countdown onTimeUp={handleFinish} />
+      </div>
       <div className="list-questions">
         {dataQuiz &&
           dataQuiz.length > 0 &&

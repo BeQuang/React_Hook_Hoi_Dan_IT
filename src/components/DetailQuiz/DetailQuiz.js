@@ -155,7 +155,7 @@ function DetailQuiz() {
         </div>
       </div>
       <div className="right-content">
-        <QuestionBoard dataQuiz={dataQuiz} />
+        <QuestionBoard dataQuiz={dataQuiz} handleFinish={handleFinish} />
       </div>
       <ModalResult
         show={isShowModalResult}

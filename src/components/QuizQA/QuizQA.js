@@ -15,7 +15,7 @@ import {
   postUpSertQA,
 } from "../../services/quizService";
 import { validAnswers, validQuestions } from "../Validate/Validate";
-import { base64ToFile, fileToBase64 } from "../ConvertImage/ConvertImage";
+import { base64ToFile, fileToBase64 } from "../Convert/Convert";
 
 function QuizQA() {
   const [dataImagePreview, setDataImagePreview] = useState({
