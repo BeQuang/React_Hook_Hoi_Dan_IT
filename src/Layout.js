@@ -13,6 +13,7 @@ import Register from "./components/Register/Register";
 import DetailQuiz from "./components/DetailQuiz/DetailQuiz";
 import ManageQuiz from "./components/ManageQuiz/ManageQuiz";
 import ManageQuestions from "./components/ManageQuestion/ManageQuestions";
+import PrivateRoute from "./routes/PrivateRoute";
 
 const NotFound = () => {
   return <div className="alert alert-danger">404. NotFound</div>;
@@ -24,11 +25,25 @@ function Layout() {
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
-          <Route path="users" element={<User />} />
+          <Route
+            path="users"
+            element={
+              <PrivateRoute>
+                <User />
+              </PrivateRoute>
+            }
+          />
         </Route>
         <Route path="/quiz/:id" element={<DetailQuiz />} />
 
-        <Route path="/admins" element={<Admin />}>
+        <Route
+          path="/admins"
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+        >
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
           <Route path="manage-quizzes" element={<ManageQuiz />} />
