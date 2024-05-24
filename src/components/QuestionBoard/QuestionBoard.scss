@@ -1,0 +1,35 @@
+.question-board {
+  .countdown {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 18px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .list-questions {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 28px;
+
+    .question {
+      border: 1px solid #ccc;
+      width: 46px;
+      height: 46px;
+      font-size: 16px;
+      //   color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+      }
+    }
+  }
+}

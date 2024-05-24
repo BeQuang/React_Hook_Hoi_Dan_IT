@@ -1,9 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 import _ from "lodash";
+import { useState } from "react";
+import Lightbox from "react-awesome-lightbox";
 
 import "./QuestionItem.scss";
 
 function QuestionItem({ index, data, handleStateCheckBox }) {
+  const [isPreviewImage, setIsPreviewImage] = useState(false);
+
   if (_.isEmpty(data)) {
     return <></>;
   }
@@ -16,7 +20,17 @@ function QuestionItem({ index, data, handleStateCheckBox }) {
     <div className="question-item">
       {data.image ? (
         <div className="body">
-          <img src={`data:image/jpeg;base64,${data.image}`} />
+          <img
+            src={`data:image/jpeg;base64,${data.image}`}
+            onClick={() => setIsPreviewImage(true)}
+          />
+          {isPreviewImage === true && (
+            <Lightbox
+              image={`data:image/jpeg;base64,${data.image}`}
+              title={"Question Image"}
+              onClose={() => setIsPreviewImage(false)}
+            ></Lightbox>
+          )}
         </div>
       ) : (
         <div className="body"></div>

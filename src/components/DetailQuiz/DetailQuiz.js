@@ -7,6 +7,7 @@ import { getDataQuiz } from "../../services/questionsService";
 import QuestionItem from "./QuestionItem/QuestionItem";
 import { postSubmitAnswer } from "../../services/answerService";
 import ModalResult from "../ModalQuiz/ModalResult";
+import QuestionBoard from "../QuestionBoard/QuestionBoard";
 
 function DetailQuiz() {
   const params = useParams();
@@ -153,7 +154,9 @@ function DetailQuiz() {
           </button>
         </div>
       </div>
-      <div className="right-content">countdown</div>
+      <div className="right-content">
+        <QuestionBoard dataQuiz={dataQuiz} />
+      </div>
       <ModalResult
         show={isShowModalResult}
         setShow={setIsShowModalResult}
