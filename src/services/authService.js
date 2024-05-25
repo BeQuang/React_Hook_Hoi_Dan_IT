@@ -12,4 +12,8 @@ const postLogout = (email, refresh_token) => {
   return axios.post("logout", { email, refresh_token });
 };
 
-export { postLogin, postRegister, postLogout };
+const getOverview = () => {
+  return axios.get("overview");
+};
+
+export { postLogin, postRegister, postLogout, getOverview };
