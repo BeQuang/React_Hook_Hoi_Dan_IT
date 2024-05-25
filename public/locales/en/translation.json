@@ -1,0 +1,107 @@
+{
+  "homepage": {
+    "title": "Feel free to explore",
+    "description": "Interesting questions about generals, equipment even top matches around the world. Timely capture the meta so that you and your friends can have more emotional games.",
+    "btn-start-login": "Get's start. It's free",
+    "btn-start-user": "Doing With Now",
+    "header": {
+      "navLinkHome": "Home",
+      "navLinkUser": "User",
+      "navLinkAdmin": "Admin",
+      "buttonLogin": "Login",
+      "buttonSingUp": "Sing Up",
+      "buttonSettings": "Settings",
+      "itemProfile": "Profile",
+      "itemLogout": "Logout",
+      "itemEnglish": "English",
+      "itemVietNamese": "VietNamese"
+    }
+  },
+  "login": {
+    "span": "Don't have an account yet?",
+    "btnSignIn": "Sign in",
+    "welcome": "Hello, who's this?",
+    "password": "Password",
+    "forgotPass": "Forgot password?",
+    "btnLogin": "Login to Quiz LOL",
+    "LoginGG": "Login with Google",
+    "LoginMS": "Login with Microsoft",
+    "btnBack": "Go to back Home"
+  },
+  "logout": {
+    "titleAbove": "Sign up",
+    "titleBelow": "and come on in",
+    "span": "Already have an account?",
+    "btnLogin": "Login",
+    "welcomeAbove": "Get better data with conversational forms, surveys,",
+    "welcomeBelow": "quizzes & more.",
+    "password": "Password",
+    "username": "Username",
+    "btnSignUp": "Sign up Quiz LOL",
+    "SignUpGG": "Sign up with Google",
+    "SignUpMS": "Sign up with Microsoft",
+    "btnBack": "Go to back Home"
+  },
+  "users": {
+    "title": "Test",
+    "btnStart": "Start now",
+    "noTest": "You don't have any test now...",
+    "detailQuiz": {
+      "btnPrev": "Prev",
+      "btnNext": "Next",
+      "btnFinish": "Finish",
+      "question": "Questions"
+    }
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "title": "Options",
+    "usersManager": "UsersManager",
+    "TestManager": "TestManager",
+    "QuestionsManager": "QuestionsManager",
+    "users": {
+      "btnAdd": "Add new users",
+      "btnUpdate": "Update a user",
+      "btnView": "View a user",
+      "username": "Username",
+      "password": "Password",
+      "uploadImage": "Upload image",
+      "previewImage": "Preview image",
+      "role": "Role",
+      "action": "Actions",
+      "view": "View",
+      "update": "Update",
+      "delete": "Delete",
+      "next": "Next >",
+      "prev": "< Prev",
+      "close": "Close",
+      "save": "Save"
+    },
+    "quiz": {
+      "legend": " Add new Test:",
+      "name": "Name Test",
+      "description": "Description",
+      "testType": "Test type...",
+      "type": "Type",
+      "uploadImage": "Upload image",
+      "save": "Save",
+      "listQuiz": "List Test",
+      "update": "Update Q/A Test",
+      "assign": "Assign to User",
+      "assign0": "Assign",
+      "action": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "question": {
+        "select": "Select Test:",
+        "select2": "Select User:",
+        "add": "Add questions:",
+        "qLabelAbove": "Questions",
+        "qLabelBelow": "'s Description",
+        "noFile": "No files available",
+        "answer": "Answer ",
+        "save": "Save Questions"
+      }
+    }
+  }
+}

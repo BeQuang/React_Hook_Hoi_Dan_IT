@@ -1,0 +1,107 @@
+{
+  "homepage": {
+    "title": "Hãy thoải mái khám phá",
+    "description": "Những câu hỏi thú vị về tướng, trang bị thậm chí là những trận đấu đỉnh cao trên toàn thế giới. Nắm bắt kịp thời meta để bạn và bạn bè có những trận đấu cảm xúc hơn.",
+    "btn-start-login": "Hãy bắt đầu. Nó miễn phí",
+    "btn-start-user": "Làm với bây giờ",
+    "header": {
+      "navLinkHome": "Trang chủ",
+      "navLinkUser": "Người dùng",
+      "navLinkAdmin": "Quản trị viên",
+      "buttonLogin": "Đăng nhập",
+      "buttonSingUp": "Đăng ký",
+      "buttonSettings": "Cài đặt",
+      "itemProfile": "Trang cá nhân",
+      "itemLogout": "Đăng xuất",
+      "itemEnglish": "Tiếng Anh",
+      "itemVietNamese": "Tiếng Việt"
+    }
+  },
+  "login": {
+    "span": "Vẫn chưa có tài khoản?",
+    "btnSignIn": "Đăng nhập",
+    "welcome": "Xin chào, đây là ai?",
+    "password": "Mật khẩu",
+    "forgotPass": "Quên mật khẩu?",
+    "btnLogin": "Đăng nhập vào Quiz LOL",
+    "LoginGG": "Đăng nhập bằng Google",
+    "LoginMS": "Đăng nhập với Microsoft",
+    "btnBack": "Trở lại Trang chủ"
+  },
+  "logout": {
+    "titleAbove": "Đăng ký",
+    "titleBelow": "và đi vào",
+    "span": "Bạn có sẵn sàng để tạo một tài khoản?",
+    "btnLogin": "Đăng nhập",
+    "welcomeAbove": "Nhận dữ liệu tốt hơn với các biểu mẫu đàm thoại, khảo sát,",
+    "welcomeBelow": "câu đố và hơn thế nữa.",
+    "password": "Mật khẩu",
+    "username": "Tên tài khoản",
+    "btnSignUp": "Đăng ký Quiz LOL",
+    "SignUpGG": "Đăng ký với Google",
+    "SignUpMS": "Đăng nhập với Microsoft",
+    "btnBack": "Trở lại Trang chủ"
+  },
+  "users": {
+    "title": "Bài kiểm tra",
+    "btnStart": "Bắt đầu bây giờ",
+    "noTest": "Bây giờ bạn không có bất kỳ bài kiểm tra nào...",
+    "detailQuiz": {
+      "btnPrev": "Trước đó",
+      "btnNext": "Kế tiếp",
+      "btnFinish": "Hoàn thành",
+      "question": "Câu hỏi"
+    }
+  },
+  "admin": {
+    "dashboard": "Bảng điều khiển",
+    "title": "Lựa chọn",
+    "usersManager": "Trình quản lý người dùng",
+    "TestManager": "Trình quản lý bài kiểm tra",
+    "QuestionsManager": "Trình quản lý câu hỏi",
+    "users": {
+      "btnAdd": "Thêm người dùng mới",
+      "btnUpdate": "Cập nhật người dùng",
+      "btnView": "Xem người dùng",
+      "username": "Tên tài khoản",
+      "password": "Mật khẩu",
+      "uploadImage": "Tải ảnh",
+      "previewImage": "Xem trước hình ảnh",
+      "role": "Phân quyền",
+      "action": "Hành động",
+      "view": "Xem",
+      "update": "Cập nhật",
+      "delete": "Xóa",
+      "next": "Kế tiếp >",
+      "prev": "< Trước đó",
+      "close": "Đóng",
+      "save": "Lưu"
+    },
+    "quiz": {
+      "legend": "Thêm bài kiểm tra mới:",
+      "name": "Tên bài kiểm tra",
+      "description": "Mô tả",
+      "testType": "Kiểu bài kiểm tra...",
+      "type": "Kiểu",
+      "uploadImage": "Tải ảnh",
+      "save": "Lưu",
+      "listQuiz": "Danh sách bài kiểm tra",
+      "update": "Cập nhật Q/A bài kiểm tra",
+      "assign": "Gán cho người dùng",
+      "assign0": "Gán",
+      "action": "Hành động",
+      "edit": "Chỉnh sửa",
+      "delete": "Xóa",
+      "question": {
+        "select": "Lựa chọn bài kiểm tra:",
+        "select2": "Lựa chọn người dùng:",
+        "add": "Thêm câu hỏi:",
+        "qLabelAbove": "Mô tả câu hỏi",
+        "qLabelBelow": "",
+        "noFile": "Không có tập tin nào",
+        "answer": "Câu trả lời ",
+        "save": "Lưu câu hỏi"
+      }
+    }
+  }
+}

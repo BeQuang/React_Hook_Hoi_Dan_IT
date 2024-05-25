@@ -1,4 +1,5 @@
 import ReactPaginate from "react-paginate";
+import { useTranslation } from "react-i18next";
 
 function TableUserPaginate({
   listUsers,
@@ -10,6 +11,8 @@ function TableUserPaginate({
   currentPage,
   setCurrentPage,
 }) {
+  const { t } = useTranslation();
+
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     fetchListUsersWithPaginate(+event.selected + 1);
@@ -21,10 +24,10 @@ function TableUserPaginate({
         <thead>
           <tr>
             <th scope="col">ID</th>
+            <th scope="col">{t("admin.users.username")}</th>
             <th scope="col">Email</th>
-            <th scope="col">Username</th>
-            <th scope="col">Role</th>
-            <th scope="col">Action</th>
+            <th scope="col">{t("admin.users.role")}</th>
+            <th scope="col">{t("admin.users.action")}</th>
           </tr>
         </thead>
         <tbody>
@@ -40,19 +43,19 @@ function TableUserPaginate({
                     className="btn btn-secondary "
                     onClick={() => handleClickBtnView(user)}
                   >
-                    View
+                    {t("admin.users.view")}
                   </button>
                   <button
                     className="btn btn-warning mx-3"
                     onClick={() => handleClickBtnUpdate(user)}
                   >
-                    Update
+                    {t("admin.users.update")}
                   </button>
                   <button
                     className="btn btn-danger"
                     onClick={() => handleClickBtnDelete(user)}
                   >
-                    Delete
+                    {t("admin.users.delete")}
                   </button>
                 </td>
               </tr>
@@ -62,12 +65,12 @@ function TableUserPaginate({
       </table>
       <div className="d-flex justify-content-center pt-4">
         <ReactPaginate
-          nextLabel="Next >"
+          nextLabel={t("admin.users.next")}
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
           pageCount={pageCount}
-          previousLabel="< Prev"
+          previousLabel={t("admin.users.prev")}
           pageClassName="page-item"
           pageLinkClassName="page-link"
           previousClassName="page-item"

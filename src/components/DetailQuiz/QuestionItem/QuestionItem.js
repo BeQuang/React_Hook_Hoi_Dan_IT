@@ -2,11 +2,13 @@
 import _ from "lodash";
 import { useState } from "react";
 import Lightbox from "react-awesome-lightbox";
+import { useTranslation } from "react-i18next";
 
 import "./QuestionItem.scss";
 
 function QuestionItem({ index, data, handleStateCheckBox }) {
   const [isPreviewImage, setIsPreviewImage] = useState(false);
+  const { t } = useTranslation();
 
   if (_.isEmpty(data)) {
     return <></>;
@@ -37,7 +39,8 @@ function QuestionItem({ index, data, handleStateCheckBox }) {
       )}
       <div className="content">
         <div className="question">
-          Question {index + 1}: {data.questionsDescription}
+          {t("users.detailQuiz.question")} {index + 1}:{" "}
+          {data.questionsDescription}
         </div>
         <div className="answer-list">
           {data.answers &&

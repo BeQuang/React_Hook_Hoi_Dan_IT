@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Suspense } from "react";
 
 import App from "./App";
 import User from "./pages/User/User";
@@ -20,7 +21,7 @@ const NotFound = () => {
 };
 function Layout() {
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       {" "}
       <Routes>
         <Route path="/" element={<App />}>
@@ -65,7 +66,7 @@ function Layout() {
         draggable
         pauseOnHover
       />
-    </>
+    </Suspense>
   );
 }
 

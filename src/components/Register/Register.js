@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SiRiotgames } from "react-icons/si";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
 import "./Register.scss";
 import videoRegister from "../../assets/video/register-LOL.mp4";
@@ -21,6 +22,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleRegister = async () => {
     // validate
@@ -62,8 +64,8 @@ function Register() {
     <div className="register">
       <div className="register-info">
         <div className="title">
-          Sign up <br />
-          and come on in
+          {t("logout.titleAbove")} <br />
+          {t("logout.titleBelow")}
         </div>
         <video autoPlay muted loop className="video">
           <source src={videoRegister} type="video/mp4" />
@@ -75,19 +77,19 @@ function Register() {
       </div>
       <div className="register-form">
         <div className="header">
-          <span>Already have an account?</span>
+          <span>{t("logout.span")}</span>
           <button
             className="btn-sign-in"
             onClick={() => handleSwitchPageLogin()}
           >
-            Log in
+            {t("logout.btnLogin")}
           </button>
           <Languages />
         </div>
         <div className="title col-4 mx-auto">Quiz LOL</div>
         <div className="welcome col-4 mx-auto">
-          Get better data with conversational forms, surveys,
-          <br /> quizzes & more.
+          {t("logout.welcomeAbove")}
+          <br /> {t("logout.welcomeBelow")}
         </div>
         <div className="form col-4 mx-auto">
           <div className="form-group">
@@ -101,41 +103,41 @@ function Register() {
             />
           </div>
           <div className="form-group">
-            <label>Password</label>
+            <label>{t("logout.password")}</label>
             <input
               type="password"
               className="form-control"
-              placeholder="Password"
+              placeholder={t("logout.password")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="form-group">
-            <label>Username</label>
+            <label>{t("logout.username")}</label>
             <input
               type="text"
               className="form-control"
-              placeholder="Username"
+              placeholder={t("logout.username")}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div>
             <button className="btn-login" onClick={() => handleRegister()}>
-              Sign up Quiz LOL
+              {t("logout.btnSignUp")}
             </button>
           </div>
           <div className="line"></div>
           <div className="different">
             <button className="btn-different google">
-              <FcGoogle /> <span>Sign up with Google</span>
+              <FcGoogle /> <span>{t("logout.SignUpGG")}</span>
             </button>
             <button className="btn-different microsoft">
-              <FaMicrosoft /> <span>Sign up with Microsoft</span>
+              <FaMicrosoft /> <span>{t("logout.SignUpMS")}</span>
             </button>
           </div>
           <div className="back-home" onClick={() => handleSwitchPageHome()}>
-            &#60;&#60; Go to back Home
+            &#60;&#60; {t("logout.btnBack")}
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { getQuizByUser } from "../../services/quizService";
 import "./ListQuiz.scss";
@@ -8,6 +9,7 @@ import "./ListQuiz.scss";
 function ListQuiz() {
   const [arrQuiz, setArrQuiz] = useState([]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     getQuizData();
@@ -36,7 +38,9 @@ function ListQuiz() {
                 alt="Card image cap"
               />
               <div className="card-body">
-                <h5 className="card-title">Quiz {index + 1}</h5>
+                <h5 className="card-title">
+                  {t("users.title")} {index + 1}
+                </h5>
                 <p className="card-text">{quiz.description}</p>
                 <button
                   className="btn btn-info"
@@ -46,16 +50,14 @@ function ListQuiz() {
                     })
                   }
                 >
-                  Start now
+                  {t("users.btnStart")}
                 </button>
               </div>
             </div>
           );
         })}
 
-      {arrQuiz && arrQuiz.length === 0 && (
-        <div>You don't have any quiz now...</div>
-      )}
+      {arrQuiz && arrQuiz.length === 0 && <div>{t("users.noTest")}</div>}
     </div>
   );
 }

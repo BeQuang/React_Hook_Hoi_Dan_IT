@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import _ from "lodash";
+import { useTranslation } from "react-i18next";
 
 import "./DetailQuiz.scss";
 import { getDataQuiz } from "../../services/questionsService";
@@ -17,6 +18,7 @@ function DetailQuiz() {
   const [index, setIndex] = useState(0);
   const [isShowModalResult, setIsShowModalResult] = useState(false);
   const [dataModalResult, setDataModalResult] = useState({});
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchQuestions();
@@ -134,7 +136,7 @@ function DetailQuiz() {
     <div className="detail-quiz container">
       <div className="left-content">
         <div className="title">
-          Quiz {quizId}: {location?.state.quizTitle}
+          {t("users.title")} {quizId}: {location?.state.quizTitle}
         </div>
         <hr />
         <QuestionItem
@@ -144,13 +146,13 @@ function DetailQuiz() {
         />
         <div className="footer">
           <button className="btn btn-secondary" onClick={() => handlePrev()}>
-            Prev
+            {t("users.detailQuiz.btnPrev")}
           </button>
           <button className="btn btn-info" onClick={() => handleNext()}>
-            Next
+            {t("users.detailQuiz.btnNext")}
           </button>
           <button className="btn btn-warning" onClick={() => handleFinish()}>
-            Finish
+            {t("users.detailQuiz.btnFinish")}
           </button>
         </div>
       </div>

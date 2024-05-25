@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllQuizForAdmin } from "../../services/quizService";
 import ModalDeleteQuiz from "../ModalQuiz/ModalDeleteQuiz";
 import ModalUpdateQuiz from "../ModalQuiz/ModalUpdateQuiz";
+import { useTranslation } from "react-i18next";
 
 function TableQuiz() {
   const [listQuiz, setListQuiz] = useState([]);
@@ -9,6 +10,7 @@ function TableQuiz() {
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
   const [dataDelete, setDataDelete] = useState({});
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchAllQuiz();
@@ -44,10 +46,10 @@ function TableQuiz() {
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name Quiz</th>
-            <th scope="col">Description</th>
-            <th scope="col">Type</th>
-            <th scope="col">Actions</th>
+            <th scope="col">{t("admin.quiz.name")}</th>
+            <th scope="col">{t("admin.quiz.description")}</th>
+            <th scope="col">{t("admin.quiz.type")}</th>
+            <th scope="col">{t("admin.quiz.action")}</th>
           </tr>
         </thead>
         <tbody>
@@ -64,13 +66,13 @@ function TableQuiz() {
                       className="btn btn-warning mx-3"
                       onClick={() => handleClickBtnEdit(quiz)}
                     >
-                      Edit
+                      {t("admin.quiz.edit")}
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => handleClickBtnDelete(quiz)}
                     >
-                      Delete
+                      {t("admin.quiz.delete")}
                     </button>
                   </td>
                 </tr>
