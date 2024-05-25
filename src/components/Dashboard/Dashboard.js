@@ -9,6 +9,7 @@ import {
   Bar,
 } from "recharts";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import "./DashBoard.scss";
 import { getOverview } from "../../services/authService";
@@ -16,6 +17,7 @@ import { getOverview } from "../../services/authService";
 function DashBoard() {
   const [dataOverview, setDataOverview] = useState([]);
   const [dataChart, setDataChart] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchDataOverview();
@@ -32,15 +34,15 @@ function DashBoard() {
 
       const data = [
         {
-          name: "Test",
+          name: t("admin.dashBoard.total.quiz"),
           T,
         },
         {
-          name: "Question",
+          name: t("admin.dashBoard.total.questions"),
           Q,
         },
         {
-          name: "Answer",
+          name: t("admin.dashBoard.total.answer"),
           A,
         },
       ];
@@ -53,11 +55,11 @@ function DashBoard() {
 
   return (
     <div className="dashboard">
-      <div className="title">Analytics DashBoard</div>
+      <div className="title">{t("admin.dashBoard.title")}</div>
       <div className="content">
         <div className="parameter">
           <div className="total">
-            <span className="text">Total Users</span>
+            <span className="text">{t("admin.dashBoard.total.user")}</span>
             <span className="count">
               {dataOverview &&
               dataOverview.users &&
@@ -69,7 +71,7 @@ function DashBoard() {
             </span>
           </div>
           <div className="total">
-            <span className="text">Total Tests</span>
+            <span className="text">{t("admin.dashBoard.total.quiz")}</span>
             <span className="count">
               {dataOverview &&
               dataOverview.others &&
@@ -81,7 +83,7 @@ function DashBoard() {
             </span>
           </div>
           <div className="total">
-            <span className="text">Total Questions</span>
+            <span className="text">{t("admin.dashBoard.total.questions")}</span>
             <span className="count">
               {dataOverview &&
               dataOverview.others &&
@@ -93,7 +95,7 @@ function DashBoard() {
             </span>
           </div>
           <div className="total">
-            <span className="text">Total Answers</span>
+            <span className="text">{t("admin.dashBoard.total.answer")}</span>
             <span className="count">
               {dataOverview &&
               dataOverview.others &&

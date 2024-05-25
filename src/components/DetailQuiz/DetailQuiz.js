@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, NavLink } from "react-router-dom";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import "./DetailQuiz.scss";
 import { getDataQuiz } from "../../services/questionsService";
@@ -135,42 +136,53 @@ function DetailQuiz() {
   };
 
   return (
-    <div className="detail-quiz container">
-      <div className="left-content">
-        <div className="title">
-          {t("users.title")} {quizId}: {location?.state.quizTitle}
+    <>
+      <Breadcrumb className="quiz-detail-new-header container">
+        <NavLink to="/" className="breadcrumb-item">
+          {t("homepage.header.navLinkHome")}
+        </NavLink>
+        <NavLink to="/users" className="breadcrumb-item">
+          {t("homepage.header.navLinkUser")}
+        </NavLink>
+        <Breadcrumb.Item active>{t("users.doing")}</Breadcrumb.Item>
+      </Breadcrumb>
+      <div className="detail-quiz container">
+        <div className="left-content">
+          <div className="title">
+            {t("users.title")} {quizId}: {location?.state.quizTitle}
+          </div>
+          <hr />
+          <QuestionItem
+            index={index}
+            data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
+            handleStateCheckBox={handleStateCheckBox}
+          />
+          <div className="footer">
+            <button className="btn btn-secondary" onClick={() => handlePrev()}>
+              {t("users.detailQuiz.btnPrev")}
+            </button>
+            <button className="btn btn-info" onClick={() => handleNext()}>
+              {t("users.detailQuiz.btnNext")}
+            </button>
+            <button className="btn btn-warning" onClick={() => handleFinish()}>
+              {t("users.detailQuiz.btnFinish")}
+            </button>
+          </div>
         </div>
-        <hr />
-        <QuestionItem
-          index={index}
-          data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
-          handleStateCheckBox={handleStateCheckBox}
-        />
-        <div className="footer">
-          <button className="btn btn-secondary" onClick={() => handlePrev()}>
-            {t("users.detailQuiz.btnPrev")}
-          </button>
-          <button className="btn btn-info" onClick={() => handleNext()}>
-            {t("users.detailQuiz.btnNext")}
-          </button>
-          <button className="btn btn-warning" onClick={() => handleFinish()}>
-            {t("users.detailQuiz.btnFinish")}
-          </button>
+        <div className="right-content">
+          <QuestionBoard
+            dataQuiz={dataQuiz}
+            handleFinish={handleFinish}
+            setIndex={setIndex}
+          />
         </div>
-      </div>
-      <div className="right-content">
-        <QuestionBoard
-          dataQuiz={dataQuiz}
-          handleFinish={handleFinish}
-          setIndex={setIndex}
+        <ModalResult
+          show={isShowModalResult}
+          setShow={setIsShowModalResult}
+          dataModalResult={dataModalResult}
         />
       </div>
-      <ModalResult
-        show={isShowModalResult}
-        setShow={setIsShowModalResult}
-        dataModalResult={dataModalResult}
-      />
-    </div>
+    </>
   );
 }
 

@@ -43,6 +43,7 @@
     "btnBack": "Go to back Home"
   },
   "users": {
+    "doing": "Take the Test",
     "title": "Test",
     "btnStart": "Start now",
     "noTest": "You don't have any test now...",
@@ -101,6 +102,15 @@
         "noFile": "No files available",
         "answer": "Answer ",
         "save": "Save Questions"
+      }
+    },
+    "dashBoard": {
+      "title": "Analytics Dashboard",
+      "total": {
+        "user": "Total Users",
+        "quiz": "Total Tests",
+        "questions": "Total Questions",
+        "answer": "Total Answers"
       }
     }
   }

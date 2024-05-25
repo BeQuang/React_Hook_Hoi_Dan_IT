@@ -43,6 +43,7 @@
     "btnBack": "Trở lại Trang chủ"
   },
   "users": {
+    "doing": "Làm bài kiểm tra",
     "title": "Bài kiểm tra",
     "btnStart": "Bắt đầu bây giờ",
     "noTest": "Bây giờ bạn không có bất kỳ bài kiểm tra nào...",
@@ -101,6 +102,15 @@
         "noFile": "Không có tập tin nào",
         "answer": "Câu trả lời ",
         "save": "Lưu câu hỏi"
+      }
+    },
+    "dashBoard": {
+      "title": "Phân tích tổng quan",
+      "total": {
+        "user": "Tổng số người dùng",
+        "quiz": "Tổng số bài kiểm tra",
+        "questions": "Tổng số câu hỏi",
+        "answer": "Tổng số câu trả lời"
       }
     }
   }

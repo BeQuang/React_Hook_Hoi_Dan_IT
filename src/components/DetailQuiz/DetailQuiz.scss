@@ -30,3 +30,13 @@
     border-radius: 8px;
   }
 }
+
+.quiz-detail-new-header {
+  padding: 42px 8px 24px;
+  font-size: 18px;
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none !important;
+  }
+}
