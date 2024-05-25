@@ -11,6 +11,7 @@ import { postLogin } from "../../services/authService.js";
 // import { validateEmail, validatePassword } from "../Validate/Validate.js";
 import { validateEmail } from "../Validate/Validate.js";
 import { doLogin } from "../../redux/action/userAction.js";
+import Languages from "../Languages/Languages.js";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -67,6 +68,7 @@ function Login() {
         >
           Sign in
         </button>
+        <Languages />
       </div>
       <div className="title col-4 mx-auto">Quiz LOL</div>
       <div className="welcome col-4 mx-auto">Hello, who's this?</div>

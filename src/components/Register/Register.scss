@@ -13,21 +13,24 @@
       color: white;
       font-size: 26px;
       text-align: center;
-      top: 16%;
+      top: 6%;
       left: 50%;
       transform: translateX(-50%);
     }
 
     .video {
-      width: 100%;
+      width: 90%;
       object-fit: cover;
       position: absolute;
-      top: 30%;
+      top: 20%;
+      border-radius: 16px;
+      left: 5%;
+      box-shadow: 6px 8px;
     }
 
     .footer {
       position: absolute;
-      bottom: 8%;
+      bottom: 4%;
       color: #dfd2d2;
       left: 50%;
       transform: translateX(-50%);
@@ -53,14 +56,16 @@
 
     .header {
       height: 46px;
-      text-align: end;
-      margin: 16px 32px;
+      margin: 8px 42px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
 
       .btn-sign-in {
         border: none;
         padding: 4px 12px;
         border-radius: 6px;
-        margin: 0 12px;
         background-color: var(--background-hover-primary);
         color: white;
 

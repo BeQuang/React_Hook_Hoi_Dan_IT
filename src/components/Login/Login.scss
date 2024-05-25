@@ -1,14 +1,16 @@
 .login {
   .header {
     height: 46px;
-    text-align: end;
-    margin: 16px 32px;
+    margin: 8px 42px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
 
     .btn-sign-in {
       border: none;
       padding: 4px 12px;
       border-radius: 6px;
-      margin: 0 12px;
       background-color: var(--background-hover-primary);
       color: white;
 

@@ -14,6 +14,7 @@ import {
   validatePassword,
   validateEmpty,
 } from "../Validate/Validate.js";
+import Languages from "../Languages/Languages.js";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -81,6 +82,7 @@ function Register() {
           >
             Log in
           </button>
+          <Languages />
         </div>
         <div className="title col-4 mx-auto">Quiz LOL</div>
         <div className="welcome col-4 mx-auto">
