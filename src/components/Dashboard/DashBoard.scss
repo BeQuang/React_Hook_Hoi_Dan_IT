@@ -1,0 +1,30 @@
+.dashboard {
+  padding: 16px 24px;
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .content {
+    display: flex;
+
+    .parameter {
+      width: 40%;
+      display: flex;
+      flex-wrap: wrap;
+
+      .total {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .chart {
+      width: 60%;
+    }
+  }
+}
