@@ -19,7 +19,7 @@
   },
   "login": {
     "span": "Vẫn chưa có tài khoản?",
-    "btnSignIn": "Đăng nhập",
+    "btnSignIn": "Đăng ký",
     "welcome": "Xin chào, đây là ai?",
     "password": "Mật khẩu",
     "forgotPass": "Quên mật khẩu?",

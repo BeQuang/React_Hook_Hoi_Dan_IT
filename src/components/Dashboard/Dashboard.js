@@ -21,6 +21,7 @@ function DashBoard() {
 
   useEffect(() => {
     fetchDataOverview();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchDataOverview = async () => {
