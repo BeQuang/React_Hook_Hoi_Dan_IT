@@ -1,26 +1,67 @@
 import { CgFileAdd } from "react-icons/cg";
 import Button from "react-bootstrap/Button";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 import "./Information.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { postInformationProfile } from "../../../services/authService";
+import { fileToBase64 } from "../../Convert/Convert";
+import { userUpdateInformation } from "../../../redux/action/userAction";
 
 function Information() {
   const [previewImage, setPreviewImage] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("USER");
   const [avatar, setAvatar] = useState("");
+  const [imageUpdate, setImageUpdate] = useState("");
+  const account = useSelector((state) => state.user.account);
+  const dispatch = useDispatch();
 
-  const handleUpLoadImage = (e) => {
+  useEffect(() => {
+    setUsername(account.username);
+    setEmail(account.email);
+    setRole(account.role);
+    setImageUpdate(account.image);
+    if (account.image) {
+      setPreviewImage(`data:image/jpeg;base64,${account.image}`);
+    }
+  }, [account]);
+
+  const handleUpLoadImage = async (e) => {
     if (e.target && e.target.files && e.target.files[0]) {
       setPreviewImage(URL.createObjectURL(e.target.files[0]));
+      const image = await fileToBase64(e.target.files[0]);
       setAvatar(e.target.files[0]);
+      setImageUpdate(image.slice(23));
     }
   };
+
+  const handleChangeInformation = async () => {
+    const res = await postInformationProfile(username, avatar);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      dispatch(userUpdateInformation(account, username, imageUpdate));
+    } else {
+      toast.error(res.EM);
+    }
+  };
+
   return (
     <>
       <form className="information">
         <div className="form-row">
           <div className="form-group">
             <label>Username</label>
-            <input type="email" className="form-control" placeholder="Email" />
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           </div>
           <div className="form-group">
             <label>Email</label>
@@ -28,12 +69,13 @@ function Information() {
               type="email"
               className="form-control"
               placeholder="Email"
+              value={email}
               disabled
             />
           </div>
           <div className="form-group">
             <label>Role</label>
-            <select className="form-control" disabled>
+            <select className="form-control" disabled value={role}>
               <option>USER</option>
               <option value="ADMIN">ADMIN</option>
             </select>
@@ -61,7 +103,11 @@ function Information() {
             <span>Preview Image</span>
           )}
         </div>
-        <Button variant="primary" className="btn-info mt-3">
+        <Button
+          variant="primary"
+          className="btn-info mt-3"
+          onClick={() => handleChangeInformation()}
+        >
           Update
         </Button>
       </form>

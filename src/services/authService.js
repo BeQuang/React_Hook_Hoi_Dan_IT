@@ -16,4 +16,18 @@ const getOverview = () => {
   return axios.get("overview");
 };
 
-export { postLogin, postRegister, postLogout, getOverview };
+const postInformationProfile = (username, image) => {
+  const data = new FormData();
+  data.append("username", username);
+  data.append("userImage", image);
+
+  return axios.post("profile", data);
+};
+
+export {
+  postLogin,
+  postRegister,
+  postLogout,
+  getOverview,
+  postInformationProfile,
+};
