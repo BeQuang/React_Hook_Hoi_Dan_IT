@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import { deleteUser } from "../../services/userService";
 
@@ -14,6 +15,7 @@ const ModalDeleteUser = ({
   setCurrentPage,
 }) => {
   const handleClose = () => setShow(false);
+  const { t } = useTranslation();
 
   const handleSubmitDeleteUser = async () => {
     const data = await deleteUser(dataDelete.id);
@@ -38,15 +40,15 @@ const ModalDeleteUser = ({
         className="modal-user"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Conform Delete the User</Modal.Title>
+          <Modal.Title>{t("modal.user.delete.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure to delete this user? Email:{" "}
+          {t("modal.user.delete.body")}{" "}
           <b>{dataDelete && dataDelete.email ? dataDelete.email : ""}</b>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Cancel
+            {t("modal.user.delete.cancel")}
           </Button>
           <Button
             variant="primary"
@@ -54,7 +56,7 @@ const ModalDeleteUser = ({
               handleSubmitDeleteUser();
             }}
           >
-            Conform
+            {t("modal.user.delete.confirm")}
           </Button>
         </Modal.Footer>
       </Modal>

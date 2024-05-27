@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import "./Information.scss";
 import { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ function Information() {
   const [imageUpdate, setImageUpdate] = useState("");
   const account = useSelector((state) => state.user.account);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setUsername(account.username);
@@ -54,11 +56,11 @@ function Information() {
       <form className="information">
         <div className="form-row">
           <div className="form-group">
-            <label>Username</label>
+            <label>{t("logout.username")}</label>
             <input
               type="email"
               className="form-control"
-              placeholder="Username"
+              placeholder={t("logout.username")}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -74,7 +76,7 @@ function Information() {
             />
           </div>
           <div className="form-group">
-            <label>Role</label>
+            <label>{t("admin.users.role")}</label>
             <select className="form-control" disabled value={role}>
               <option>USER</option>
               <option value="ADMIN">ADMIN</option>
@@ -85,7 +87,7 @@ function Information() {
           <div className="form-group">
             <label className="btn-upload" htmlFor="labelUpload">
               <CgFileAdd />
-              Upload Image
+              {t("admin.quiz.uploadImage")}
             </label>
             <input
               id="labelUpload"
@@ -100,7 +102,7 @@ function Information() {
             // eslint-disable-next-line jsx-a11y/alt-text
             <img src={previewImage} />
           ) : (
-            <span>Preview Image</span>
+            <span>{t("admin.users.previewImage")}</span>
           )}
         </div>
         <Button
@@ -108,7 +110,7 @@ function Information() {
           className="btn-info mt-3"
           onClick={() => handleChangeInformation()}
         >
-          Update
+          {t("admin.users.update")}
         </Button>
       </form>
     </>

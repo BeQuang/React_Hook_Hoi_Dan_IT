@@ -25,7 +25,7 @@ function Login() {
   const handleLogin = async () => {
     // validate
     if (!validateEmail(email)) {
-      toast.error("Invalid email");
+      toast.error(t("toast.email"));
       return;
     }
     // else if (!validatePassword(password)) {

@@ -33,10 +33,10 @@ function ManageQuiz() {
   const handleSubmitQuiz = async () => {
     // validate
     if (!validateEmpty(name)) {
-      toast.error("Please enter the NameQuiz field");
+      toast.error(t("toast.fieldNameQuiz"));
       return;
     } else if (!validateEmpty(description)) {
-      toast.error("Please enter the Description field");
+      toast.error(t("toast.fieldDescription"));
       return;
     }
 

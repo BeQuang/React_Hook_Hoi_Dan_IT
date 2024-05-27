@@ -113,5 +113,69 @@
         "answer": "Tổng số câu trả lời"
       }
     }
+  },
+  "toast": {
+    "email": "Email không hợp lệ",
+    "chooseQuiz": "Vui lòng chọn một bài kiểm tra",
+    "notAnswer": "Không được để trống Câu trả lời",
+    "atQuestion": "tại Câu hỏi",
+    "validAnswer": "Chọn ít nhất một câu trả lời đúng trong câu hỏi",
+    "validQuestion": "Không phải mô tả trống cho câu hỏi",
+    "createSuccess": "Tạo câu hỏi và câu trả lời thành công!",
+    "fieldNameQuiz": "Vui lòng nhập trường tên bài kiểm tra",
+    "fieldDescription": "Vui lòng nhập trường Mô tả",
+    "validPass": "Mật khẩu ít nhất 6 ký tự bao gồm số và ký tự in hoa",
+    "fieldUsername": "Vui lòng nhập trường tên người dùng",
+    "validNewPass": "Mật khẩu mới ít nhất 6 ký tự bao gồm số và ký tự in hoa",
+    "validConfirm": "Xác nhận mật khẩu không khớp",
+    "signInSuccess": ". Đăng nhập bằng tài khoản bạn vừa tạo"
+  },
+  "modal": {
+    "quiz": {
+      "delete": {
+        "title": "Xác nhận xóa bài kiểm tra",
+        "body": "Bạn có chắc chắn xóa bài kiểm tra này không? ID:",
+        "cancel": "Hủy bỏ",
+        "confirm": "Xác nhận"
+      },
+      "result": {
+        "title": "Kết quả của bạn....",
+        "totalQuestion": "Tổng số câu hỏi:",
+        "totalCorrect": "Tổng số câu trả lời đúng:",
+        "show": "Hiển thị câu trả lời",
+        "close": "Đóng"
+      },
+      "update": {
+        "title": "Cập nhật một bài kiểm tra",
+        "name": "Tên bài kiểm tra",
+        "description": "Mô tả",
+        "type": "Loại",
+        "upload": "Tải ảnh",
+        "previewImage": "Xem trước hình ảnh",
+        "close": "Đóng",
+        "save": "Lưu"
+      }
+    },
+    "user": {
+      "delete": {
+        "title": "Xác nhận xóa người dùng",
+        "body": "Bạn có chắc chắn xóa người dùng này không? Email:",
+        "cancel": "Hủy bỏ",
+        "confirm": "Xác nhận"
+      }
+    }
+  },
+  "profile": {
+    "title": "Hồ sơ",
+    "information": "Thông tin",
+    "history": "Lịch sử",
+    "current": "Mật khẩu hiện tại",
+    "new": "Mật khẩu mới",
+    "confirm": "Xác nhận mật khẩu",
+    "change": "Đổi mật khẩu",
+    "name": "Tên bài kiểm tra",
+    "totalQuestion": "Tổng số câu hỏi",
+    "totalCorrect": "Tổng số chính xác",
+    "dateTime": "Ngày giờ"
   }
 }

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 import "./History.scss";
 import { getHistoryProfile } from "../../../services/authService";
 
 function History() {
   const [history, setHistory] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchHistory();
@@ -44,10 +46,10 @@ function History() {
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Test Name</th>
-            <th scope="col">Total Question</th>
-            <th scope="col">Total Correct</th>
-            <th scope="col">Date Time</th>
+            <th scope="col">{t("profile.name")}</th>
+            <th scope="col">{t("profile.totalQuestion")}</th>
+            <th scope="col">{t("profile.totalCorrect")}</th>
+            <th scope="col">{t("profile.dateTime")}</th>
           </tr>
         </thead>
         <tbody>

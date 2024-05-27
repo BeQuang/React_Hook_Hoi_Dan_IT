@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { CgFileAdd } from "react-icons/cg";
 import { toast } from "react-toastify";
 import _ from "lodash";
+import { useTranslation } from "react-i18next";
 
 import "./ModalQuiz.scss";
 import { validateEmpty } from "../Validate/Validate";
@@ -35,6 +36,7 @@ function ModalUpdateQuiz({
   // eslint-disable-next-line
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!_.isEmpty(dataUpdate)) {
@@ -92,27 +94,27 @@ function ModalUpdateQuiz({
         className="modal-quiz"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update a Quiz</Modal.Title>
+          <Modal.Title>{t("modal.quiz.update.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label>Name Quiz</label>
+                <label>{t("modal.quiz.update.name")}</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Name Quiz"
+                  placeholder={t("modal.quiz.update.name")}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-6">
-                <label>Description</label>
+                <label>{t("modal.quiz.update.description")}</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Description"
+                  placeholder={t("modal.quiz.update.description")}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
@@ -120,7 +122,7 @@ function ModalUpdateQuiz({
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label>Type</label>
+                <label>{t("modal.quiz.update.type")}</label>
                 <select
                   className="form-control"
                   onChange={(e) => setType(e.target.value)}
@@ -136,7 +138,7 @@ function ModalUpdateQuiz({
               <div className="form-group col-md-12">
                 <label className="btn-upload" htmlFor="labelUpload">
                   <CgFileAdd />
-                  Upload image
+                  {t("modal.quiz.update.upload")}
                 </label>
                 <input
                   id="labelUpload"
@@ -151,17 +153,17 @@ function ModalUpdateQuiz({
                 // eslint-disable-next-line jsx-a11y/alt-text
                 <img src={previewImage} />
               ) : (
-                <span>Preview image</span>
+                <span>{t("modal.quiz.update.previewImage")}</span>
               )}
             </div>
           </form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("modal.quiz.update.close")}
           </Button>
           <Button variant="primary" onClick={handSubmitUpdateQuiz}>
-            Save
+            {t("modal.quiz.update.save")}
           </Button>
         </Modal.Footer>
       </Modal>

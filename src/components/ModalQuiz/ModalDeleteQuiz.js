@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import { deleteQuizForAdmin } from "../../services/quizService";
 
@@ -14,6 +15,7 @@ const ModalDeleteQuiz = ({
   setCurrentPage,
 }) => {
   const handleClose = () => setShow(false);
+  const { t } = useTranslation();
 
   const handleSubmitDeleteQuiz = async () => {
     const data = await deleteQuizForAdmin(dataDelete.id);
@@ -38,14 +40,14 @@ const ModalDeleteQuiz = ({
         className="modal-quiz"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Conform Delete the User</Modal.Title>
+          <Modal.Title>{t("modal.quiz.delete.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure to delete this quiz? Id: <b>{dataDelete.id}</b>
+          {t("modal.quiz.delete.body")} <b>{dataDelete.id}</b>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Cancel
+            {t("modal.quiz.delete.cancel")}
           </Button>
           <Button
             variant="primary"
@@ -53,7 +55,7 @@ const ModalDeleteQuiz = ({
               handleSubmitDeleteQuiz();
             }}
           >
-            Conform
+            {t("modal.quiz.delete.confirm")}
           </Button>
         </Modal.Footer>
       </Modal>

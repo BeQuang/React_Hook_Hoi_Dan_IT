@@ -93,17 +93,15 @@ function ModalUser({
     // validate
     const isValidEmail = validateEmail(email);
     if (!isValidEmail) {
-      toast.error("Invalid email");
+      toast.error();
       return;
     }
     if (!validatePassword(password)) {
-      toast.error(
-        "Password of at least 6 characters including numbers and capital characters"
-      );
+      toast.error(t("toast.validPass"));
       return;
     }
     if (!validateEmpty(username)) {
-      toast.error("Please enter the username field");
+      toast.error(t("toast.fieldUsername"));
       return;
     }
 
@@ -124,7 +122,7 @@ function ModalUser({
   const handSubmitUpdateUser = async () => {
     // validate
     if (!validateEmpty(username)) {
-      toast.error("Please enter the username field");
+      toast.error(t("toast.fieldUsername"));
       return;
     }
 

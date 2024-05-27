@@ -1,6 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import { useTranslation } from "react-i18next";
 
 import Information from "./Information/Information";
 import ChangePass from "./ChangePass/ChangePass";
@@ -8,6 +9,7 @@ import History from "./History/History";
 
 function Profile({ show, setShow }) {
   const handleClose = () => setShow(false);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -19,7 +21,7 @@ function Profile({ show, setShow }) {
         size="xl"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Profile</Modal.Title>
+          <Modal.Title>{t("profile.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Tabs
@@ -27,13 +29,13 @@ function Profile({ show, setShow }) {
             id="uncontrolled-tab-example"
             className="mb-3"
           >
-            <Tab eventKey="profile" title="Information">
+            <Tab eventKey="profile" title={t("profile.information")}>
               <Information />
             </Tab>
-            <Tab eventKey="changePass" title="Change Password">
+            <Tab eventKey="changePass" title={t("profile.change")}>
               <ChangePass />
             </Tab>
-            <Tab eventKey="history" title="History">
+            <Tab eventKey="history" title={t("profile.history")}>
               <History />
             </Tab>
           </Tabs>

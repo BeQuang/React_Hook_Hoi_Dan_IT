@@ -113,5 +113,69 @@
         "answer": "Total Answers"
       }
     }
+  },
+  "toast": {
+    "email": "Invalid email",
+    "chooseQuiz": "Please choose a Test",
+    "notAnswer": "Not empty Answer",
+    "atQuestion": "at Question",
+    "validAnswer": "Choose at least one correct answer in the question",
+    "validQuestion": "Not empty description for Question",
+    "createSuccess": "Created Questions and Answers successfully!",
+    "fieldNameQuiz": "Please enter the NameTest field",
+    "fieldDescription": "Please enter the Description field",
+    "validPass": "Password of at least 6 characters including numbers and capital characters",
+    "fieldUsername": "Please enter the username field",
+    "validNewPass": "NewPassword of at least 6 characters including numbers and capital characters",
+    "validConfirm": "Confirm password does not match",
+    "signInSuccess": ". Sign in with the account you just created"
+  },
+  "modal": {
+    "quiz": {
+      "delete": {
+        "title": "Confirm Delete the Test",
+        "body": "Are you sure to delete this test? Id:",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      },
+      "result": {
+        "title": "Your Result....",
+        "totalQuestion": "Total Question:",
+        "totalCorrect": "Total Correct answers:",
+        "show": "Show answers",
+        "close": "Close"
+      },
+      "update": {
+        "title": "Update a Test",
+        "name": "Name Test",
+        "description": "Description",
+        "type": "Type",
+        "upload": "Upload Image",
+        "previewImage": "Preview Image",
+        "close": "Close",
+        "save": "Save"
+      }
+    },
+    "user": {
+      "delete": {
+        "title": "Confirm Delete the User",
+        "body": "Are you sure to delete this user? Email:",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      }
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "information": "Information",
+    "history": "History",
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm Password",
+    "change": "Change Password",
+    "name": "Name Test",
+    "totalQuestion": "Total Question",
+    "totalCorrect": "Total Correct",
+    "dateTime": "Date Time"
   }
 }

@@ -189,7 +189,7 @@ function QuizQA() {
   const handleUpdateQuestionForQuiz = async () => {
     // todo and validate
     if (_.isEmpty(selectedQuiz)) {
-      toast.error("Please choose a Quiz");
+      toast.error(t("toast.chooseQuiz"));
       return;
     }
 
@@ -198,13 +198,13 @@ function QuizQA() {
 
     if (!validAnswer.isValidAnswer) {
       toast.error(
-        `Not empty Answer ${validAnswer.indexAnswer} at Question ${validAnswer.indexQuestion}`
+        `${t("toast.notAnswer")} ${validAnswer.indexAnswer} ${t(
+          "toast.atQuestion"
+        )} ${validAnswer.indexQuestion}`
       );
       return;
     } else if (!validAnswer.isValidAnswerCorrect) {
-      toast.error(
-        `Choose at least one correct answer in the question ${validAnswer.indexQuestion}`
-      );
+      toast.error(`${t("toast.validAnswer")} ${validAnswer.indexQuestion}`);
       return;
     }
 
@@ -212,7 +212,7 @@ function QuizQA() {
     const validQuestion = validQuestions(questions);
 
     if (!validQuestion.isValidQuestion) {
-      toast.error(`Not empty description for Question ${validQuestion.indexQ}`);
+      toast.error(`${t("toast.validQuestion")} ${validQuestion.indexQ}`);
       return;
     }
 

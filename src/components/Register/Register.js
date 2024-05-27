@@ -27,22 +27,20 @@ function Register() {
   const handleRegister = async () => {
     // validate
     if (!validateEmail(email)) {
-      toast.error("Invalid email");
+      toast.error(t("toast.email"));
       return;
     } else if (!validatePassword(password)) {
-      toast.error(
-        "Password of at least 6 characters including numbers and capital characters"
-      );
+      toast.error(t("toast.validPass"));
       return;
     } else if (!validateEmpty(username)) {
-      toast.error("Please enter the username field");
+      toast.error(t("toast.fieldUsername"));
       return;
     }
 
     let data = await postRegister(email, password, username);
 
     if (data && data.EC === 0) {
-      toast.success(`${data.EM}. Sign in with the account you just created`);
+      toast.success(`${data.EM}${t("toast.fieldUsername")}`);
       setEmail("");
       setPassword("");
       setUsername("");
