@@ -21,7 +21,6 @@ function ChangePass() {
 
     if (currentPass === confirmPass) {
       const res = await postChangePasswordProfile(currentPass, newPass);
-      console.log(res);
       if (res && res.EC === 0) {
         toast.success(res.EM);
       } else {

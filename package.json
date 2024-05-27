@@ -13,6 +13,7 @@
     "i18next-browser-languagedetector": "6.1.4",
     "i18next-http-backend": "1.4.1",
     "lodash": "4.17.21",
+    "moment": "^2.30.1",
     "nprogress": "0.2.0",
     "react": "18.2.0",
     "react-awesome-lightbox": "1.8.1",

@@ -28,6 +28,10 @@ const postChangePasswordProfile = (current_password, new_password) => {
   return axios.post("change-password", { current_password, new_password });
 };
 
+const getHistoryProfile = () => {
+  return axios.get("history");
+};
+
 export {
   postLogin,
   postRegister,
@@ -35,4 +39,5 @@ export {
   getOverview,
   postInformationProfile,
   postChangePasswordProfile,
+  getHistoryProfile,
 };
