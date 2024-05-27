@@ -24,10 +24,15 @@ const postInformationProfile = (username, image) => {
   return axios.post("profile", data);
 };
 
+const postChangePasswordProfile = (current_password, new_password) => {
+  return axios.post("change-password", { current_password, new_password });
+};
+
 export {
   postLogin,
   postRegister,
   postLogout,
   getOverview,
   postInformationProfile,
+  postChangePasswordProfile,
 };

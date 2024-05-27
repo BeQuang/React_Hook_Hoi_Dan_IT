@@ -27,13 +27,13 @@ function Profile({ show, setShow }) {
             id="uncontrolled-tab-example"
             className="mb-3"
           >
-            <Tab eventKey="home" title="Information">
+            <Tab eventKey="profile" title="Information">
               <Information />
             </Tab>
-            <Tab eventKey="profile" title="Change Password">
+            <Tab eventKey="changePass" title="Change Password">
               <ChangePass />
             </Tab>
-            <Tab eventKey="contact" title="History">
+            <Tab eventKey="history" title="History">
               <History />
             </Tab>
           </Tabs>
