@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
+
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const ModalResult = ({ show, setShow, dataModalResult }) => {
+const ModalResult = ({ show, setShow, dataModalResult, handleShowAnswer }) => {
   const handleClose = () => setShow(false);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -13,22 +16,30 @@ const ModalResult = ({ show, setShow, dataModalResult }) => {
         className="modal-user"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Your Result....</Modal.Title>
+          <Modal.Title>{t("modal.quiz.result.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-            Total Question: <b>{dataModalResult.countTotal}</b>
+            {t("modal.quiz.result.totalQuestion")}{" "}
+            <b>{dataModalResult.countTotal}</b>
           </div>
           <div>
-            Total Correct answers: <b>{dataModalResult.countCorrect}</b>
+            {t("modal.quiz.result.totalCorrect")}{" "}
+            <b>{dataModalResult.countCorrect}</b>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Show answers
+          <Button
+            variant="secondary"
+            onClick={() => {
+              handleClose();
+              handleShowAnswer();
+            }}
+          >
+            {t("modal.quiz.result.show")}
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Close
+            {t("modal.quiz.result.close")}
           </Button>
         </Modal.Footer>
       </Modal>

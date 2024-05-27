@@ -2,6 +2,7 @@ import Select from "react-select";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Accordion from "react-bootstrap/Accordion";
+import { useTranslation } from "react-i18next";
 
 import "./ManageQuiz.scss";
 import { postCreateNewQuiz } from "../../services/quizService";
@@ -21,6 +22,7 @@ function ManageQuiz() {
   const [description, setDescription] = useState("");
   const [type, setType] = useState("EASY");
   const [image, setImage] = useState(null);
+  const { t } = useTranslation();
 
   const handleChangeFile = (e) => {
     if (e.target && e.target.files && e.target.files[0]) {
@@ -31,10 +33,10 @@ function ManageQuiz() {
   const handleSubmitQuiz = async () => {
     // validate
     if (!validateEmpty(name)) {
-      toast.error("Please enter the NameQuiz field");
+      toast.error(t("toast.fieldNameQuiz"));
       return;
     } else if (!validateEmpty(description)) {
-      toast.error("Please enter the Description field");
+      toast.error(t("toast.fieldDescription"));
       return;
     }
 
@@ -56,13 +58,13 @@ function ManageQuiz() {
       <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>
-            <div className="title">ManageQuiz</div>
+            <div className="title">{t("admin.TestManager")}</div>
           </Accordion.Header>
           <Accordion.Body>
             <div className="add-new">
               <fieldset className="border rounded-3 p-3">
                 <legend className="float-none w-auto px-3">
-                  Add new Quiz:
+                  {t("admin.quiz.legend")}
                 </legend>
                 <div className="form-floating mb-3">
                   <input
@@ -72,28 +74,28 @@ function ManageQuiz() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
-                  <label>Name Quiz</label>
+                  <label>{t("admin.quiz.name")}</label>
                 </div>
                 <div className="form-floating">
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Description"
+                    placeholder={t("admin.quiz.description")}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
-                  <label>Description</label>
+                  <label>{t("admin.quiz.description")}</label>
                 </div>
                 <div className="my-3">
                   <Select
                     defaultValue={type}
                     onChange={setType}
                     options={options}
-                    placeholder="Quiz type..."
+                    placeholder={t("admin.quiz.testType")}
                   />
                 </div>
                 <div className="more-actions form-group">
-                  <label className="mb-1">Upload Image</label>
+                  <label className="mb-1">{t("admin.quiz.uploadImage")}</label>
                   <input
                     type="file"
                     className="form-control"
@@ -105,7 +107,7 @@ function ManageQuiz() {
                     className="btn btn-info"
                     onClick={() => handleSubmitQuiz()}
                   >
-                    Save
+                    {t("admin.quiz.save")}
                   </button>
                 </div>
               </fieldset>
@@ -117,7 +119,7 @@ function ManageQuiz() {
         <Accordion>
           <Accordion.Item eventKey="1">
             <Accordion.Header>
-              <div className="title">ListQuiz</div>
+              <div className="title">{t("admin.quiz.listQuiz")}</div>
             </Accordion.Header>
             <Accordion.Body>
               <TableQuiz />
@@ -129,7 +131,7 @@ function ManageQuiz() {
         <Accordion>
           <Accordion.Item eventKey="2">
             <Accordion.Header>
-              <div className="title">Update Q/A Quiz</div>
+              <div className="title">{t("admin.quiz.update")}</div>
             </Accordion.Header>
             <Accordion.Body>
               <QuizQA />
@@ -141,7 +143,7 @@ function ManageQuiz() {
         <Accordion>
           <Accordion.Item eventKey="3">
             <Accordion.Header>
-              <div className="title">Assign to User</div>
+              <div className="title">{t("admin.quiz.assign")}</div>
             </Accordion.Header>
             <Accordion.Body>
               <AssignQuiz />

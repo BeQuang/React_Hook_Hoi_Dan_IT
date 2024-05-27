@@ -1,19 +1,22 @@
+import { useTranslation } from "react-i18next";
+
 function TableUser({
   listUsers,
   handleClickBtnView,
   handleClickBtnUpdate,
   handleClickBtnDelete,
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <table className="table table-info table-bordered table-hover">
         <thead>
           <tr>
             <th scope="col">ID</th>
+            <th scope="col">{t("admin.users.username")}</th>
             <th scope="col">Email</th>
-            <th scope="col">Username</th>
-            <th scope="col">Role</th>
-            <th scope="col">Action</th>
+            <th scope="col">{t("admin.users.role")}</th>
+            <th scope="col">{t("admin.users.action")}</th>
           </tr>
         </thead>
         <tbody>
@@ -29,19 +32,19 @@ function TableUser({
                     className="btn btn-secondary "
                     onClick={() => handleClickBtnView(user)}
                   >
-                    View
+                    {t("admin.users.view")}
                   </button>
                   <button
                     className="btn btn-warning mx-3"
                     onClick={() => handleClickBtnUpdate(user)}
                   >
-                    Update
+                    {t("admin.users.update")}
                   </button>
                   <button
                     className="btn btn-danger"
                     onClick={() => handleClickBtnDelete(user)}
                   >
-                    Delete
+                    {t("admin.users.delete")}
                   </button>
                 </td>
               </tr>

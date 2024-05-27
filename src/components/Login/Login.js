@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { ImSpinner } from "react-icons/im";
+import { useTranslation } from "react-i18next";
 
 import "./Login.scss";
 import { postLogin } from "../../services/authService.js";
 // import { validateEmail, validatePassword } from "../Validate/Validate.js";
 import { validateEmail } from "../Validate/Validate.js";
 import { doLogin } from "../../redux/action/userAction.js";
+import Languages from "../Languages/Languages.js";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -18,11 +20,12 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
 
   const handleLogin = async () => {
     // validate
     if (!validateEmail(email)) {
-      toast.error("Invalid email");
+      toast.error(t("toast.email"));
       return;
     }
     // else if (!validatePassword(password)) {
@@ -51,39 +54,49 @@ function Login() {
     navigate("/");
   };
 
+  const handleKeyDown = (e) => {
+    if (e && e.keyCode === 13) {
+      handleLogin();
+    }
+  };
+
   return (
     <div className="login">
       <div className="header">
-        <span>Don't have an account yet?</span>
+        <span>{t("login.span")}</span>
         <button
           className="btn-sign-in"
           onClick={() => handleSwitchPageSingIn()}
         >
-          Sign in
+          {t("login.btnSignIn")}
         </button>
+        <Languages />
       </div>
       <div className="title col-4 mx-auto">Quiz LOL</div>
-      <div className="welcome col-4 mx-auto">Hello, who's this?</div>
+      <div className="welcome col-4 mx-auto">{t("login.welcome")}</div>
       <div className="form col-4 mx-auto">
         <div className="form-group">
           <label>Email</label>
           <input
             type="email"
             className="form-control"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label>{t("login.password")}</label>
           <input
             type="password"
             className="form-control"
+            placeholder={t("login.password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           />
         </div>
-        <span className="forgot">Forgot password?</span>
+        <span className="forgot">{t("login.forgotPass")}</span>
         <div>
           <button
             className="btn-login"
@@ -91,20 +104,20 @@ function Login() {
             disabled={isLoading}
           >
             {isLoading === true && <ImSpinner className="loader-icon" />}
-            <span>Login to Quiz LOL</span>
+            <span>{t("login.btnLogin")}</span>
           </button>
         </div>
         <div className="line"></div>
         <div className="different">
           <button className="btn-different google">
-            <FcGoogle /> <span>Login with Google</span>
+            <FcGoogle /> <span>{t("login.LoginGG")}</span>
           </button>
           <button className="btn-different microsoft">
-            <FaMicrosoft /> <span>Login with Microsoft</span>
+            <FaMicrosoft /> <span>{t("login.LoginMS")}</span>
           </button>
         </div>
         <div className="back-home" onClick={() => handleSwitchPageHome()}>
-          &#60;&#60; Go to back Home
+          &#60;&#60; {t("login.btnBack")}
         </div>
       </div>
     </div>

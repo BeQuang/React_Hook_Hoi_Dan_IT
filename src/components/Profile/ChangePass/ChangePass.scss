@@ -1,0 +1,16 @@
+.change-pass {
+  padding: 8px 12px;
+
+  .form-row {
+    display: flex;
+    gap: 16px;
+  }
+
+  .form-group {
+    width: 50%;
+
+    &.confirm {
+      width: calc(50% - 8px);
+    }
+  }
+}

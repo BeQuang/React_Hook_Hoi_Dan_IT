@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, NavLink } from "react-router-dom";
 import _ from "lodash";
+import { useTranslation } from "react-i18next";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import "./DetailQuiz.scss";
 import { getDataQuiz } from "../../services/questionsService";
 import QuestionItem from "./QuestionItem/QuestionItem";
 import { postSubmitAnswer } from "../../services/answerService";
 import ModalResult from "../ModalQuiz/ModalResult";
+import QuestionBoard from "../QuestionBoard/QuestionBoard";
 
 function DetailQuiz() {
   const params = useParams();
@@ -16,6 +19,9 @@ function DetailQuiz() {
   const [index, setIndex] = useState(0);
   const [isShowModalResult, setIsShowModalResult] = useState(false);
   const [dataModalResult, setDataModalResult] = useState({});
+  const { t } = useTranslation();
+  const [isSubmitQuiz, setIsSubmitQuiz] = useState(false);
+  const [isShowAnswer, setIsShowAnswer] = useState(false);
 
   useEffect(() => {
     fetchQuestions();
@@ -45,14 +51,14 @@ function DetailQuiz() {
             answers.push(item.answers);
           });
 
+          answers = _.orderBy(answers, ["id"], ["asc"]);
+
           return { questionId: key, answers, questionsDescription, image };
         })
         .value();
       setDataQuiz(data);
     }
   };
-
-  // console.log("check >>>>>", dataQuiz, dataQuiz[index]);
 
   const handlePrev = () => {
     if (index - 1 < 0) return;
@@ -92,13 +98,38 @@ function DetailQuiz() {
 
     const res = await postSubmitAnswer(payload);
     if (res && res.EC === 0) {
+      setIsSubmitQuiz(true);
       setDataModalResult({
         countCorrect: res.DT.countCorrect,
         countTotal: res.DT.countTotal,
         quizData: res.DT.quizData,
       });
       setIsShowModalResult(true);
-      console.log(res);
+
+      //update DataQuiz with correct answer
+      if (res.DT && res.DT.quizData) {
+        let dataQuizClone = _.cloneDeep(dataQuiz);
+        let a = res.DT.quizData;
+        for (let q of a) {
+          for (let i = 0; i < dataQuizClone.length; i++) {
+            if (+q.questionId === +dataQuizClone[i].questionId) {
+              //update answer
+              let newAnswers = [];
+              for (let j = 0; j < dataQuizClone[i].answers.length; j++) {
+                let s = q.systemAnswers.find(
+                  (item) => +item.id === +dataQuizClone[i].answers[j].id
+                );
+                if (s) {
+                  dataQuizClone[i].answers[j].isCorrect = true;
+                }
+                newAnswers.push(dataQuizClone[i].answers[j]);
+              }
+              dataQuizClone[i].answers = newAnswers;
+            }
+          }
+        }
+        setDataQuiz(dataQuizClone);
+      }
     } else {
       alert("something wrongs.......");
     }
@@ -129,37 +160,66 @@ function DetailQuiz() {
     }
   };
 
+  const handleShowAnswer = () => {
+    if (!isSubmitQuiz) return;
+    setIsShowAnswer(true);
+  };
+
   return (
-    <div className="detail-quiz container">
-      <div className="left-content">
-        <div className="title">
-          Quiz {quizId}: {location?.state.quizTitle}
+    <>
+      <Breadcrumb className="quiz-detail-new-header container">
+        <NavLink to="/" className="breadcrumb-item">
+          {t("homepage.header.navLinkHome")}
+        </NavLink>
+        <NavLink to="/users" className="breadcrumb-item">
+          {t("homepage.header.navLinkUser")}
+        </NavLink>
+        <Breadcrumb.Item active>{t("users.doing")}</Breadcrumb.Item>
+      </Breadcrumb>
+      <div className="detail-quiz container">
+        <div className="left-content">
+          <div className="title">
+            {t("users.title")} {quizId}: {location?.state.quizTitle}
+          </div>
+          <hr />
+          <QuestionItem
+            index={index}
+            data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
+            handleStateCheckBox={handleStateCheckBox}
+            isShowAnswer={isShowAnswer}
+            isSubmitQuiz={isSubmitQuiz}
+          />
+          <div className="footer">
+            <button className="btn btn-secondary" onClick={() => handlePrev()}>
+              {t("users.detailQuiz.btnPrev")}
+            </button>
+            <button className="btn btn-info" onClick={() => handleNext()}>
+              {t("users.detailQuiz.btnNext")}
+            </button>
+            <button
+              className="btn btn-warning"
+              disabled={isSubmitQuiz}
+              onClick={() => handleFinish()}
+            >
+              {t("users.detailQuiz.btnFinish")}
+            </button>
+          </div>
         </div>
-        <hr />
-        <QuestionItem
-          index={index}
-          data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
-          handleStateCheckBox={handleStateCheckBox}
+        <div className="right-content">
+          <QuestionBoard
+            dataQuiz={dataQuiz}
+            handleFinish={handleFinish}
+            setIndex={setIndex}
+          />
+        </div>
+        <ModalResult
+          show={isShowModalResult}
+          setShow={setIsShowModalResult}
+          dataModalResult={dataModalResult}
+          handleShowAnswer={handleShowAnswer}
         />
-        <div className="footer">
-          <button className="btn btn-secondary" onClick={() => handlePrev()}>
-            Prev
-          </button>
-          <button className="btn btn-info" onClick={() => handleNext()}>
-            Next
-          </button>
-          <button className="btn btn-warning" onClick={() => handleFinish()}>
-            Finish
-          </button>
-        </div>
       </div>
-      <div className="right-content">countdown</div>
-      <ModalResult
-        show={isShowModalResult}
-        setShow={setIsShowModalResult}
-        dataModalResult={dataModalResult}
-      />
-    </div>
+    </>
   );
 }
 

@@ -43,6 +43,13 @@ instance.interceptors.response.use(
   },
   function (error) {
     NProgress.done();
+    // token expired: EC === -999
+    if (error.response.data && error.response.data.EC === -999) {
+      window.location.href = "./login";
+    }
+    // Hoặc dùng cách gọi API refresh_token
+    // Tham khảo axios-retry sau đó khi xác định mã lỗi là -999 thì thực hiện gọi lại API refresh-token
+
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return error && error.response && error.response.data

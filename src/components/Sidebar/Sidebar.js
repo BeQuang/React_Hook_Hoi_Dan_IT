@@ -12,12 +12,14 @@ import { SiRiotgames } from "react-icons/si";
 import { MdDashboard } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
+import { useTranslation } from "react-i18next";
 
 import sidebarBg from "../../assets/image/sidebar.jpg";
 import "./Sidebar.scss";
 
 function Sidebar({ image, collapsed, toggled, handleToggleSidebar }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSwitchPageHome = () => {
     navigate("/");
@@ -59,19 +61,21 @@ function Sidebar({ image, collapsed, toggled, handleToggleSidebar }) {
         <SidebarContent>
           <Menu iconShape="circle">
             <MenuItem icon={<MdDashboard />}>
-              Dashboard <Link to="/admins" />
+              {t("admin.dashboard")} <Link to="/admins" />
             </MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu icon={<FaGem />} title={"Features"}>
+            <SubMenu icon={<FaGem />} title={t("admin.title")}>
               <MenuItem>
-                Users manage <Link to="/admins/manage-users" />
+                {t("admin.usersManager")} <Link to="/admins/manage-users" />
               </MenuItem>
               <MenuItem>
-                Quizzes manage <Link to="/admins/manage-quizzes" />
+                {t("admin.TestManager")}
+                <Link to="/admins/manage-quizzes" />
               </MenuItem>
               <MenuItem>
-                Questions manage <Link to="/admins/manage-questions" />
+                {t("admin.QuestionsManager")}
+                <Link to="/admins/manage-questions" />
               </MenuItem>
             </SubMenu>
           </Menu>

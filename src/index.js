@@ -12,6 +12,9 @@ import reportWebVitals from "./reportWebVitals";
 import { store, persistor } from "./redux/store";
 import Layout from "./Layout";
 
+// import i18n (needs to be bundled ;))
+import "./utils/i18n";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

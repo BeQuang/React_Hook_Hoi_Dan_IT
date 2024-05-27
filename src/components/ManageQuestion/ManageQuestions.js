@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import "./ManageQuestions.scss";
 import { getAllQuizForAdmin } from "../../services/quizService";
@@ -40,6 +41,7 @@ function ManageQuestions() {
   const [selectedQuiz, setSelectedQuiz] = useState({});
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   const [listQuiz, setListQuiz] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchAllQuiz();
@@ -155,7 +157,7 @@ function ManageQuestions() {
   const handleSubmitQuestionForQuiz = async () => {
     // todo and validate
     if (_.isEmpty(selectedQuiz)) {
-      toast.error("Please choose a Quiz");
+      toast.error(t("toast.chooseQuiz"));
       return;
     }
 
@@ -164,13 +166,13 @@ function ManageQuestions() {
 
     if (!validAnswer.isValidAnswer) {
       toast.error(
-        `Not empty Answer ${validAnswer.indexAnswer} at Question ${validAnswer.indexQuestion}`
+        `${t("toast.notAnswer")} ${validAnswer.indexAnswer} ${t(
+          "toast.atQuestion"
+        )} ${validAnswer.indexQuestion}`
       );
       return;
     } else if (!validAnswer.isValidAnswerCorrect) {
-      toast.error(
-        `Choose at least one correct answer in the question ${validAnswer.indexQuestion}`
-      );
+      toast.error(`${t("toast.validAnswer")} ${validAnswer.indexQuestion}`);
       return;
     }
 
@@ -178,7 +180,7 @@ function ManageQuestions() {
     const validQuestion = validQuestions(questions);
 
     if (!validQuestion.isValidQuestion) {
-      toast.error(`Not empty description for Question ${validQuestion.indexQ}`);
+      toast.error(`${t("toast.validQuestion")} ${validQuestion.indexQ}`);
       return;
     }
 
@@ -221,7 +223,7 @@ function ManageQuestions() {
       }
     }
 
-    toast.success("Created Questions and Answers successfully!");
+    toast.success(t("toast.createSuccess"));
     setQuestions(INIT_QUESTIONS);
   };
 
@@ -235,11 +237,11 @@ function ManageQuestions() {
 
   return (
     <div className="manage-questions">
-      <div className="title">ManageQuestions</div>
+      <div className="title">{t("admin.QuestionsManager")}</div>
       <hr />
       <div className="add-questions">
         <div className="col-6 form-group">
-          <label className="mb-2">Select Quiz:</label>
+          <label className="mb-2">{t("admin.quiz.question.select")}</label>
           <Select
             defaultValue={selectedQuiz}
             onChange={setSelectedQuiz}
@@ -248,7 +250,7 @@ function ManageQuestions() {
           />
         </div>
       </div>
-      <div className="mt-3 mb-2">Add questions:</div>
+      <div className="mt-3 mb-2">{t("admin.quiz.question.add")}</div>
       <div className="">
         {questions &&
           questions.length > 0 &&
@@ -265,7 +267,10 @@ function ManageQuestions() {
                         handleOnChange("QUESTION", question.id, e.target.value)
                       }
                     />
-                    <label>Questions {index + 1}'s Description</label>
+                    <label>
+                      {t("admin.quiz.question.qLabelAbove")} {index + 1}
+                      {t("admin.quiz.question.qLabelBelow")}
+                    </label>
                   </div>
                   <div className="group-upload">
                     <label htmlFor={`${question.id}`} className="label-upload">
@@ -293,7 +298,7 @@ function ManageQuestions() {
                           {question.imageName}
                         </span>
                       ) : (
-                        "No files available"
+                        t("admin.quiz.question.noFile")
                       )}
                     </span>
                   </div>
@@ -350,7 +355,9 @@ function ManageQuestions() {
                               )
                             }
                           />
-                          <label>Answer {index + 1}</label>
+                          <label>
+                            {t("admin.quiz.question.answer")} {index + 1}
+                          </label>
                         </div>
                         <div className="btn-group">
                           <span
@@ -387,7 +394,7 @@ function ManageQuestions() {
             className="btn btn-info"
             onClick={() => handleSubmitQuestionForQuiz()}
           >
-            Save Questions
+            {t("admin.quiz.question.save")}
           </button>
         </div>
         {isPreviewImage === true && (

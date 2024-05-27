@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { GoPlus } from "react-icons/go";
+import { useTranslation } from "react-i18next";
 
 // import ModalCreateUser from "../ModalUser/ModalCreateUser";
 // import ModalUpdateUser from "../ModalUser/ModalUpdateUser";
@@ -23,6 +24,7 @@ function ManageUser() {
   const [show, setShow] = useState(false);
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const { t } = useTranslation();
 
   useEffect(() => {
     // fetchListUsers();
@@ -74,7 +76,7 @@ function ManageUser() {
 
   return (
     <div className="manage-user">
-      <div className="title">Manage User</div>
+      <div className="title">{t("admin.usersManager")}</div>
       <div className="content">
         <div className="btn-add-user">
           <button
@@ -82,7 +84,7 @@ function ManageUser() {
             onClick={() => handleClickBtnCreate()}
           >
             <GoPlus />
-            Add new users
+            {t("admin.users.btnAdd")}
           </button>
         </div>
         <div className="table-users">

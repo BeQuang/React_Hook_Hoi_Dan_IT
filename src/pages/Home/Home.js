@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import "./Home.scss";
 import videoHome from "../../assets/video/video-homepage.webm";
@@ -7,6 +8,7 @@ import videoHome from "../../assets/video/video-homepage.webm";
 function Home() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="home-container">
@@ -17,20 +19,16 @@ function Home() {
       </div>
 
       <div className="home-content">
-        <h3 className="title-home">Feel free to explore</h3>
-        <p className="description-home">
-          Interesting questions about generals, equipment even top matches
-          around the world. Timely capture the meta so that you and your friends
-          can have more emotional games.
-        </p>
+        <h3 className="title-home">{t("homepage.title")}</h3>
+        <p className="description-home">{t("homepage.description")}</p>
         <div>
           {isAuthenticated === false ? (
             <button className="btn-start" onClick={() => navigate("/login")}>
-              Get's start. It's free
+              {t("homepage.btn-start-login")}
             </button>
           ) : (
             <button className="btn-start" onClick={() => navigate("/users")}>
-              Doing With Now
+              {t("homepage.btn-start-user")}
             </button>
           )}
         </div>

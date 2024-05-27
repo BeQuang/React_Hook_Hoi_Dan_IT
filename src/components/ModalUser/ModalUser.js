@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { CgFileAdd } from "react-icons/cg";
 import _ from "lodash";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import "./ModalUser.scss";
 import {
@@ -45,25 +46,27 @@ function ModalUser({
   const [disabled, setDisabled] = useState(false);
   const [disabledView, setDisabledView] = useState(false);
   const [title, setTitle] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
     switch (typeModal) {
       case "Create":
         setDisabled(false);
         setDisabledView(false);
-        setTitle("Add new user");
+        setTitle(t("admin.users.btnAdd"));
         break;
       case "Update":
         setDisabled(true);
         setDisabledView(false);
-        setTitle("Update a user");
+        setTitle(t("admin.users.btnUpdate"));
         break;
       case "View":
         setDisabledView(true);
-        setTitle("View a user");
+        setTitle(t("admin.users.btnView"));
         break;
       default:
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeModal]);
 
   // Handle Update User
@@ -90,17 +93,15 @@ function ModalUser({
     // validate
     const isValidEmail = validateEmail(email);
     if (!isValidEmail) {
-      toast.error("Invalid email");
+      toast.error();
       return;
     }
     if (!validatePassword(password)) {
-      toast.error(
-        "Password of at least 6 characters including numbers and capital characters"
-      );
+      toast.error(t("toast.validPass"));
       return;
     }
     if (!validateEmpty(username)) {
-      toast.error("Please enter the username field");
+      toast.error(t("toast.fieldUsername"));
       return;
     }
 
@@ -121,7 +122,7 @@ function ModalUser({
   const handSubmitUpdateUser = async () => {
     // validate
     if (!validateEmpty(username)) {
-      toast.error("Please enter the username field");
+      toast.error(t("toast.fieldUsername"));
       return;
     }
 
@@ -164,11 +165,11 @@ function ModalUser({
                 />
               </div>
               <div className="form-group col-md-6">
-                <label>Password</label>
+                <label>{t("admin.users.password")}</label>
                 <input
                   type="password"
                   className="form-control"
-                  placeholder="Password"
+                  placeholder={t("admin.users.password")}
                   value={password}
                   disabled={disabled}
                   onChange={(e) => setPassword(e.target.value)}
@@ -177,18 +178,18 @@ function ModalUser({
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label>Username</label>
+                <label>{t("admin.users.username")}</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Username"
+                  placeholder={t("admin.users.username")}
                   value={username}
                   disabled={disabledView}
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-6">
-                <label>Role</label>
+                <label>{t("admin.users.role")}</label>
                 <select
                   className="form-control"
                   onChange={(e) => setRole(e.target.value)}
@@ -204,7 +205,7 @@ function ModalUser({
               <div className="form-group col-md-12">
                 <label className="btn-upload" htmlFor="labelUpload">
                   <CgFileAdd />
-                  Upload image
+                  {t("admin.users.uploadImage")}
                 </label>
                 <input
                   id="labelUpload"
@@ -220,22 +221,22 @@ function ModalUser({
                 // eslint-disable-next-line jsx-a11y/alt-text
                 <img src={previewImage} />
               ) : (
-                <span>Preview image</span>
+                <span>{t("admin.users.previewImage")}</span>
               )}
             </div>
           </form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("admin.users.close")}
           </Button>
           {typeModal === "Create" ? (
             <Button variant="primary" onClick={handSubmitCreateUser}>
-              Save
+              {t("admin.users.save")}
             </Button>
           ) : typeModal === "Update" ? (
             <Button variant="primary" onClick={handSubmitUpdateUser}>
-              Save
+              {t("admin.users.save")}
             </Button>
           ) : null}
         </Modal.Footer>

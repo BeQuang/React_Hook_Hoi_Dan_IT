@@ -7,8 +7,9 @@
     min-height: 300px;
 
     img {
-      width: 300px;
+      width: 100px;
       height: auto;
+      cursor: pointer;
     }
   }
 
@@ -27,4 +28,14 @@
       }
     }
   }
+}
+
+.incorrect {
+  color: red;
+  font-size: 26px;
+}
+
+.correct {
+  color: green;
+  font-size: 26px;
 }
